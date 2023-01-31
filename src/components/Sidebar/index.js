@@ -1,13 +1,19 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
 
-const StyledSidebar = styled.aside`
-  background-color: ${props => props.theme.backgroundColor};
-  height: 100%;
-  width: 300px;
-  margin-right: 20px;
+const SidebarStyled = styled.div`
+  width: ${props => props.width};
+  background-color: ${props => props.theme.sidebarBg};
+  color: ${props => props.theme.sidebarColor};
+  border-right: 1px solid ${({ theme }) => theme.sidebar.borderColor};
 `;
 
-export default function Sidebar() {
-  return <StyledSidebar>Sidebar</StyledSidebar>;
-}
+const Sidebar = ({ width, children }) => {
+  return (
+    <SidebarStyled width={width}>
+      {children}
+    </SidebarStyled>
+  );
+};
+
+export default Sidebar;

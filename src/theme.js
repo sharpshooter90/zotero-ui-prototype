@@ -1,24 +1,62 @@
+import { hover } from '@testing-library/user-event/dist/hover';
+import { rgba } from 'polished'
+
+const backgroundColor =  "#151515";
+const secondaryBg = "#2B2B2B";
+const buttonPrimaryBg = "#FF5858";
+const buttonSecondaryBg = secondaryBg;
+const borderColor = "#343434";
+
+
 export default {
     mode: "dark",
-    backgroundColor: "#333",
+    backgroundColor: backgroundColor,
     textColor: "#fff",
     headerBackgroundColor: "#151515",
     headerTextColor: "#fff",
-
+    
+    // #TODO: optimize this later with spacing for all compoents and global
+    spacing: {
+      md: 16
+    },
     colors: {
       primary: "#FFF",
       primaryBg: "#FF5858",
       secondary: "#FFF",
-      secondaryBg: "#2B2B2B",
+      secondaryBg: secondaryBg,
       gray: "#6c757d",
-      lightgray: "rgba(108, 117, 125, 0.05)"
+      lightgray: "rgba(108, 117, 125, 0.05)",
+      primaryHover: rgba(secondaryBg, 0.6),
+      secondaryHover: rgba(secondaryBg, 0.4),
+      
+      surface: backgroundColor,
+      // themeing specific colors
+      light: {
+        background: '#fff',
+        text: '#333',
+        border: borderColor,
+      },
+      dark: {
+        background: '#333',
+        text: '#fff',
+        border: borderColor,
+      },
     },
-    fontSizes: {
-      xs: "12px",
-      sm: "14px",
-      md: "16px",
-      lg: "18px"
+    typography: {
+      fontFamily: 'Arial, sans-serif',
+      fontSizes: {
+        xs: "12px",
+        sm: "14px",
+        md: "16px",
+        lg: "18px"
+      },
+      fontWeight: 'normal',
     },
+
+    shadow: {
+      searchInput: '0 2px 4px rgba(0, 0, 0, 0.1)',
+    },
+    
     fontWeights: {
       hairline: 100,
       thin: 200,
@@ -29,12 +67,14 @@ export default {
     button: {
       variants: {
         primary: {
-          color: "#007bff",
-          backgroundColor: "rgba(0, 123, 255, 0.05)"
+          color: buttonPrimaryBg,
+          backgroundColor: "rgba(0, 123, 255, 0.05)",
+          hoverBg: rgba(buttonPrimaryBg, 0.6),
         },
         secondary: {
           color: "#6c757d",
-          backgroundColor: "rgba(108, 117, 125, 0.05)"
+          backgroundColor: "rgba(108, 117, 125, 0.05)",
+          hoverBg: rgba(buttonSecondaryBg, 0.6),
         }
       },
       spacing: {
@@ -57,5 +97,33 @@ export default {
           fontSize: "18px"
         }
       }
-    }
+    },
+    sidebar: {
+      width: '300px',
+      background: (props) => props.theme.colors[props.theme.mode].background,
+      color: (props) => props.theme.colors[props.theme.mode].text,
+      border: (props) => props.theme.colors[props.theme.mode].border,
+      fontFamily: (props) => props.theme.typography.fontFamily,
+      fontSize: (props) => props.theme.typography.fontSize,
+      fontWeight: (props) => props.theme.typography.fontWeight,
+      borderColor: (props) => props.theme.colors[props.theme.mode].border,
+    },
+    searchInput: {
+      background: (props) => rgba(props.theme.colors[props.theme.mode].background, 0),
+      color: (props) => props.theme.colors[props.theme.mode].text,
+      placeholderColor: (props) => rgba(props.theme.colors[props.theme.mode].text, 0.6),
+      iconColor: (props) => props.theme.colors[props.theme.mode].text,
+      border: (props) => props.theme.colors[props.theme.mode].border,
+      fontFamily: (props) => props.theme.typography.fontFamily,
+      fontSize: (props) => props.theme.typography.fontSize,
+      inputHoverBg: (props) => rgba(props.theme.colors[props.theme.mode].background, 0.6),
+    },
+    ListItem: {
+      background: (props) => props.theme.colors[props.theme.mode].background,
+      backgroundHover: (props) => rgba(props.theme.colors[props.theme.mode].background, 0.6),
+      color: (props) => props.theme.colors[props.theme.mode].text,
+      border: (props) => props.theme.colors[props.theme.mode].border,
+      fontFamily: (props) => props.theme.typography.fontFamily,
+      fontSize: (props) => props.theme.typography.fontSize,
+    },
   };
