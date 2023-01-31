@@ -6,7 +6,7 @@ const Button = styled.button`
   border: none;
   border-radius: 4px;
   padding: ${({ theme, size }) => theme.button.spacing[size]};
-  font-size: ${props => props.theme.fontSizes[props.size]};
+  font-size: ${props => props.theme.typography.fontSizes[props.size]};
   font-weight: ${props => props.theme.fontWeights[props.weight]};
   color: ${props => props.theme.colors[props.variant]};
   background-color: ${props => props.theme.colors[`${props.variant}Bg`]};
@@ -14,8 +14,20 @@ const Button = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: all 0.2s ease-in-out;
+
   & svg {
     margin-right: 10px;
+  }
+
+  &:hover {
+    cursor: pointer;
+    background-color: ${({ theme, variant }) => theme.button.variants[variant].hoverBg};
+  }
+
+  &:disabled {
+    background-color: ${({ theme }) => theme.colors.disabled};
+    cursor: not-allowed;
   }
 `;
 
