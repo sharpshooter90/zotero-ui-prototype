@@ -6,23 +6,21 @@ const Button = styled.button`
   border: none;
   border-radius: 4px;
   padding: ${({ theme, size }) => theme.button.spacing[size]};
-  font-size: ${props => props.theme.typography.fontSizes[props.size]};
-  font-weight: ${props => props.theme.fontWeights[props.weight]};
-  color: ${props => props.theme.colors[props.variant]};
-  background-color: ${props => props.theme.colors[`${props.variant}Bg`]};
-  cursor: ${props => (props.disabled ? "not-allowed" : "pointer")};
+  font-size: ${(props) => props.theme.typography.fontSizes[props.size]};
+  font-weight: ${(props) => props.theme.fontWeights[props.weight]};
+  color: ${(props) => props.theme.colors[props.variant]};
+  background-color: ${(props) => props.theme.colors[`${props.variant}Bg`]};
+  cursor: ${(props) => (props.disabled ? "not-allowed" : "pointer")};
   display: flex;
   align-items: center;
   justify-content: center;
   transition: all 0.2s ease-in-out;
-
-  & svg {
-    margin-right: 10px;
-  }
+  gap: 10px;
 
   &:hover {
     cursor: pointer;
-    background-color: ${({ theme, variant }) => theme.button.variants[variant].hoverBg};
+    background-color: ${({ theme, variant }) =>
+      theme.button.variants[variant].hoverBg};
   }
 
   &:disabled {
@@ -34,24 +32,20 @@ const Button = styled.button`
 Button.defaultProps = {
   variant: "primary",
   size: "md",
-  spacing: "md",
   iconSize: 1,
-  weight: "medium",
-  disabled: false
+  disabled: false,
 };
 
 export default ({
   variant = "primary",
   size = "md",
-  spacing = "md",
   iconSize = 1,
   disabled = false,
   leftIcon,
   rightIcon,
-  weight,
-  children
+  children,
 }) => (
-  <Button variant={variant} size={size} spacing={size} disabled={disabled} >
+  <Button variant={variant} size={size} disabled={disabled}>
     {leftIcon && <Icon path={leftIcon} size={iconSize} />}
     {children}
     {rightIcon && <Icon path={rightIcon} size={iconSize} />}
