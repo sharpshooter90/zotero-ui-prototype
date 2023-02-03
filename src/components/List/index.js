@@ -63,6 +63,8 @@ const ListItem = ({
   subheader,
   leftIconColor,
   rightIconColor,
+  onClick,
+  sx,
 }) => {
   const [hover, setHover] = useState(false);
   return (
@@ -70,6 +72,8 @@ const ListItem = ({
       isActive={isActive}
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
+      onClick={onClick}
+      style={sx}
     >
       {leftIcon && (
         <Icon path={leftIcon} size={iconSize} color={leftIconColor} />
