@@ -6,6 +6,8 @@ const secondaryBg = "#2B2B2B";
 const buttonPrimaryBg = "#FF5858";
 const buttonSecondaryBg = secondaryBg;
 const borderColor = "#343434";
+const primaryFontFamily = "Inter, sans-serif";
+const brandBlueShade = "#64D2FF";
 
 export default {
   mode: "dark",
@@ -27,6 +29,7 @@ export default {
     lightgray: "rgba(108, 117, 125, 0.05)",
     primaryHover: rgba(secondaryBg, 0.6),
     secondaryHover: rgba(secondaryBg, 0.4),
+    iconFolderColor: brandBlueShade,
 
     surface: backgroundColor,
     // themeing specific colors
@@ -42,7 +45,7 @@ export default {
     },
   },
   typography: {
-    fontFamily: "Arial, sans-serif",
+    fontFamily: primaryFontFamily,
     fontSizes: {
       xs: "12px",
       sm: "14px",
