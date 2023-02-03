@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { rgba } from "polished";
 import Icon from "@mdi/react";
 import { mdiHome } from "@mdi/js";
+import ListSubheader from "./ListSubheader";
 
 const ListStyled = styled.ul`
   padding: 0;
@@ -59,6 +60,9 @@ const ListItem = ({
   isActive,
   iconSize = 1,
   onHoverActions,
+  subheader,
+  leftIconColor,
+  rightIconColor,
 }) => {
   const [hover, setHover] = useState(false);
   return (
@@ -67,9 +71,14 @@ const ListItem = ({
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
     >
-      {leftIcon && <Icon path={leftIcon} size={iconSize} />}
+      {leftIcon && (
+        <Icon path={leftIcon} size={iconSize} color={leftIconColor} />
+      )}
+      {subheader && { subheader }}
       {children}
-      {rightIcon && <Icon path={rightIcon} size={iconSize} />}
+      {rightIcon && (
+        <Icon path={rightIcon} size={iconSize} color={rightIconColor} />
+      )}
       {hover && onHoverActions && (
         <StyledHoverActions>
           {onHoverActions.map((Action, index) => (
