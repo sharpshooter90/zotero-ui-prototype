@@ -3,7 +3,8 @@ import { rgba } from "polished";
 
 const backgroundColor = "#151515";
 const secondaryBg = "#2B2B2B";
-const buttonPrimaryBg = "#FF5858";
+const brandPrimary = "#FF5858";
+const buttonPrimaryBg = brandPrimary;
 const buttonSecondaryBg = secondaryBg;
 const borderColor = "#343434";
 const primaryFontFamily = "Inter, sans-serif";
@@ -18,7 +19,10 @@ export default {
 
   // #TODO: optimize this later with spacing for all compoents and global
   spacing: {
-    md: 16,
+    xs: "8px 16px",
+    sm: "10px 20px",
+    md: "12px 24px",
+    lg: "16px 32px",
   },
   colors: {
     primary: "#FFF",
@@ -109,6 +113,7 @@ export default {
     fontSize: (props) => props.theme.typography.fontSize,
     fontWeight: (props) => props.theme.typography.fontWeight,
     borderColor: (props) => props.theme.colors[props.theme.mode].border,
+    borderOnHoverColor: (props) => props.theme.colors.primaryBg,
   },
   searchInput: {
     background: (props) =>

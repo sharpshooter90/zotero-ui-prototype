@@ -7,7 +7,6 @@ const Wrapper = styled.div`
   display: flex;
   align-items: center;
   cursor: pointer;
-  margin-bottom: 8px;
 `;
 
 const Chevron = styled(Icon)`
@@ -25,7 +24,6 @@ const Content = styled.div`
 const Collapse = ({ children, easing, position, chevron, isOpen }) => {
   return (
     <Wrapper>
-      {console.log(isOpen)}
       {chevron && <Chevron path={mdiChevronDown} isOpen={isOpen} />}
       <Content isOpen={isOpen} style={{ transition: `all 0.3s ${easing}` }}>
         {children}

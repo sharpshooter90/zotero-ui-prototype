@@ -4,7 +4,7 @@ import styled from "styled-components";
 const SubheaderContainer = styled.div`
   font-size: 12px;
   font-weight: 500;
-  padding: 1rem 1.5rem;
+  padding: 8px 16px;
   font-weight: 500;
   font-size: 12px;
   line-height: 15px;
