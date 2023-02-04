@@ -1,15 +1,15 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
-import Icon from '@mdi/react';
-import { mdiMagnify } from '@mdi/js';
+import React, { useState } from "react";
+import styled from "styled-components";
+import Icon from "@mdi/react";
+import { mdiMagnify } from "@mdi/js";
 
 const SearchInputContainer = styled.div`
   display: flex;
   align-items: center;
-  padding: 8px;
   border-radius: 4px;
   background-color: ${({ theme }) => theme.searchInput.background};
   box-shadow: ${({ theme }) => theme.shadow.searchInput};
+  gap: 4px;
   &:hover {
     background-color: ${({ theme }) => theme.searchInput.inputHoverBg};
   }
@@ -20,14 +20,12 @@ const SearchInputContainer = styled.div`
     outline: none;
     font-size: ${({ theme }) => theme.searchInput.fontSize};
     color: ${({ theme }) => theme.searchInput.colors};
-    padding: 8px;
     background-color: transparent;
 
     &::placeholder {
+      font-size: ${({ theme }) => theme.searchInput.fontSize};
       color: ${({ theme }) => theme.searchInput.placeholderColor};
     }
-
-    
   }
 
   svg {
@@ -46,7 +44,7 @@ const StyledInput = styled.input`
 `;
 
 const SearchInput = ({ placeholder }) => {
-  const [searchValue, setSearchValue] = useState('');
+  const [searchValue, setSearchValue] = useState("");
 
   return (
     <SearchInputContainer>
@@ -55,7 +53,7 @@ const SearchInput = ({ placeholder }) => {
         type="text"
         placeholder={placeholder}
         value={searchValue}
-        onChange={e => setSearchValue(e.target.value)}
+        onChange={(e) => setSearchValue(e.target.value)}
       />
     </SearchInputContainer>
   );

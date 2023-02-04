@@ -10,6 +10,9 @@ const StyledIconButton = styled.button`
   outline: none;
   padding: 0;
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   &:hover {
     background-color: rgba(0, 0, 0, 0.1);
   }

@@ -2,25 +2,23 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { rgba } from "polished";
 import Icon from "@mdi/react";
-import { mdiHome } from "@mdi/js";
-import ListSubheader from "./ListSubheader";
 
 const ListStyled = styled.ul`
   padding: 0;
+  margin: 8px 0;
 `;
 
 const ListItemStyled = styled.li`
   background-color: transparent;
-  padding: ${(props) => props.theme.spacing.md}px;
+  padding: ${(props) => props.theme.spacing.xs};
+  font-size: ${(props) => props.theme.typography.fontSizes.sm};
   display: flex;
   align-items: center;
   position: relative;
   cursor: pointer;
+  gap: 8px;
   &:hover {
     background-color: ${({ theme }) => theme.ListItem.background};
-  }
-  svg {
-    margin-right: 8px;
   }
 `;
 
@@ -29,8 +27,13 @@ const StyledHoverActions = styled.div`
   align-items: center;
   justify-content: space-between;
   position: absolute;
-  top: 20px;
-  right: 0;
+  right: 12px;
+  background: ${rgba("black", 0.4)};
+  backdrop-filter: blur(32px);
+  height: 80%;
+  border-radius: 6px;
+  padding: 0px 12px;
+  gap: 8px;
 
   svg {
     color: ${({ theme }) => theme.ListItem.onHoverIconColor};
@@ -95,7 +98,6 @@ const ListItem = ({
 };
 
 ListItem.defaultProps = {
-  leftIcon: mdiHome,
   rightIcon: null,
   isActive: false,
   iconSize: 1,

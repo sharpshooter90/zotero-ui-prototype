@@ -1,18 +1,30 @@
-import React from 'react';
-import styled from 'styled-components';
+import React, { useState } from "react";
+import styled, { useTheme } from "styled-components";
+import { DragSizing } from "react-drag-sizing";
 
-const SidebarStyled = styled.div`
-  width: ${props => props.width};
-  background-color: ${props => props.theme.sidebarBg};
-  color: ${props => props.theme.sidebarColor};
-  border-right: 1px solid ${({ theme }) => theme.sidebar.borderColor};
-`;
+const Sidebar = ({ width, dragHandlePosition, children }) => {
+  const theme = useTheme();
+  const [hover, setHover] = useState(true);
+  console.log(theme.colors[theme.mode].border);
 
-const Sidebar = ({ width, children }) => {
+  const handleStyle = {
+    backgroundColor: hover
+      ? theme.sidebar.borderColor
+      : theme.sidebar.borderOnHoverColor,
+  };
+
   return (
-    <SidebarStyled width={width}>
+    <DragSizing
+      border={dragHandlePosition}
+      width={width}
+      handlerStyle={{
+        backgroundColor: theme.colors[theme.mode].border,
+      }}
+      handlerWidth={1}
+      style={{ minWidth: width }}
+    >
       {children}
-    </SidebarStyled>
+    </DragSizing>
   );
 };
 
