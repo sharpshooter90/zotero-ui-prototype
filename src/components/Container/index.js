@@ -16,7 +16,7 @@ import {
   mdiFolder,
   mdiFolderOpen,
   mdiDotsVertical,
-  mdiPlusBox,
+  mdiPlus,
   mdiFile,
   mdiBook,
 } from "@mdi/js";
@@ -37,6 +37,11 @@ const ListMyLibraryOnHoverActionIcons = {
   newFolder: mdiFolderPlusOutline,
   newFile: mdiFilePlusOutline,
   more: mdiDotsVertical,
+};
+
+const myLibraryOnHoverActionIcons = {
+  search: mdiMagnify,
+  createNew: mdiPlus,
 };
 
 const collectionTypeIcons = {
@@ -165,16 +170,16 @@ export default function Container() {
           <ListItem>
             <SearchInput placeholder="search" />
           </ListItem>
-          <ListItem
-            leftIcon={mdiHome}
-            // onHoverActions={mapIconsToActions(mdiPlusBox)}
-            iconSize={0.8}
-          >
+          <ListItem leftIcon={mdiHome} iconSize={0.8}>
             Home
           </ListItem>
         </List>
         <List>
-          <ListSubheader>My Library</ListSubheader>
+          <ListSubheader
+            onHoverActions={mapIconsToActions(myLibraryOnHoverActionIcons)}
+          >
+            My Library
+          </ListSubheader>
           {mapCollections(
             myLibraryCollections.collections,
             setIsOpen,
