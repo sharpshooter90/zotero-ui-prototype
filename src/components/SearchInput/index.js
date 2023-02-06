@@ -19,10 +19,12 @@ const SearchInputContainer = styled.div`
     border: none;
     outline: none;
     font-size: ${({ theme }) => theme.searchInput.fontSize};
+    font-family: ${({ theme }) => theme.searchInput.fontFamily};
     color: ${({ theme }) => theme.searchInput.colors};
     background-color: transparent;
 
     &::placeholder {
+      font-family: ${({ theme }) => theme.searchInput.fontFamily};
       font-size: ${({ theme }) => theme.searchInput.fontSize};
       color: ${({ theme }) => theme.searchInput.placeholderColor};
     }
