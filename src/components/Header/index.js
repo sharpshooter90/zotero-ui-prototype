@@ -1,11 +1,10 @@
+import { mdiClose, mdiCloudSync, mdiPlus } from "@mdi/js";
 import React, { useState } from "react";
-import styled, { useTheme } from "styled-components";
+import styled from "styled-components";
+import { FontStyle, FontWeight, Span } from "styled-typography";
 import Button from "../Button";
-import { mdiPlus, mdiCloudSync, mdiClose } from "@mdi/js";
-import Modal, { ModalContent, ModalHeader, ModalFooter } from "../Modal";
+import Modal, { ModalContent, ModalFooter, ModalHeader } from "../Modal";
 import SearchInput from "../SearchInput";
-import { Span, Heading, FontWeight, FontStyle } from "styled-typography";
-import IconButton from "../IconButton";
 
 const StyledHeader = styled.header`
   display: flex;
@@ -32,9 +31,35 @@ const StyledRightCol = styled.div`
   gap: 10px;
 `;
 
+const createNewModal = ({ isModalOpen, setIsModalOpen }) => {
+  return isModalOpen ? (
+    <Modal
+      isOpen={isModalOpen}
+      onClose={() => setIsModalOpen(false)}
+      closeIcon={mdiClose}
+    >
+      <ModalHeader>
+        <Span
+          level={4}
+          fontWeight={FontWeight.Medium}
+          fontStyle={FontStyle.Normal}
+          color="#fff"
+          lineHeight={1.3}
+        >
+          Hello, World!
+        </Span>
+        <div>
+          <SearchInput placeholder="ISBNs, DOIs, PMIDs, arXiv IDs, ADS Bibcodes" />
+        </div>
+      </ModalHeader>
+      <ModalContent>Content</ModalContent>
+      <ModalFooter>Footer</ModalFooter>
+    </Modal>
+  ) : null;
+};
+
 export default function Header() {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const theme = useTheme();
   return (
     <StyledHeader>
       <StyledLeftCol></StyledLeftCol>
@@ -56,30 +81,7 @@ export default function Header() {
         >
           Add New
         </Button>
-        {isModalOpen && (
-          <Modal
-            isOpen={isModalOpen}
-            onClose={() => setIsModalOpen(false)}
-            closeIcon={mdiClose}
-          >
-            <ModalHeader>
-              <Span
-                level={4}
-                fontWeight={FontWeight.Medium}
-                fontStyle={FontStyle.Normal}
-                color="#fff"
-                lineHeight={1.3}
-              >
-                Hello, World!
-              </Span>
-              <div>
-                <SearchInput placeholder="ISBNs, DOIs, PMIDs, arXiv IDs, ADS Bibcodes" />
-              </div>
-            </ModalHeader>
-            <ModalContent>Content</ModalContent>
-            <ModalFooter>Footer</ModalFooter>
-          </Modal>
-        )}
+        {createNewModal({ isModalOpen, setIsModalOpen })}
       </StyledRightCol>
     </StyledHeader>
   );
