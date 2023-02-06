@@ -44,8 +44,9 @@ export default ({
   leftIcon,
   rightIcon,
   children,
+  onClick,
 }) => (
-  <Button variant={variant} size={size} disabled={disabled}>
+  <Button variant={variant} size={size} disabled={disabled} onClick={onClick}>
     {leftIcon && <Icon path={leftIcon} size={iconSize} />}
     {children}
     {rightIcon && <Icon path={rightIcon} size={iconSize} />}

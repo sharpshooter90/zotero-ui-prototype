@@ -6,6 +6,7 @@ import Main from "../Main";
 import { List, ListItem } from "../List";
 import SearchInput from "../SearchInput";
 import IconButton from "../IconButton";
+import Button from "../Button";
 import {
   mdiPencilOutline,
   mdiDeleteOutline,
@@ -95,7 +96,7 @@ const mapCollections = (
   return Object.values(collections).map((item, index) => {
     const isOpen = !!openItems[item.id];
     return (
-      <>
+      <React.Fragment key={index}>
         <ListItem
           leftIcon={isOpen ? mdiFolderOpen : mdiFolder}
           leftIconColor={theme.colors.iconFolderColor}
@@ -125,7 +126,7 @@ const mapCollections = (
             </Collapse>
           );
         })}
-      </>
+      </React.Fragment>
     );
   });
 };
