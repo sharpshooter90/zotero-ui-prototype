@@ -6,7 +6,6 @@ import Main from "../Main";
 import { List, ListItem } from "../List";
 import SearchInput from "../SearchInput";
 import IconButton from "../IconButton";
-import Button from "../Button";
 import {
   mdiPencilOutline,
   mdiDeleteOutline,

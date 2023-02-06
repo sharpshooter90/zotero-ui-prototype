@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import React, { useRef, useEffect } from "react";
+import ReactDOM from "react-dom";
 import styled from "styled-components";
+import { Icon } from "@mdi/react";
 
 const ModalOverlay = styled.div`
   position: fixed;
@@ -14,28 +16,12 @@ const ModalOverlay = styled.div`
   z-index: 1;
 `;
 
-const StyledModalContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  padding: 0px;
-  gap: 10px;
+const StyledModalContainer = styled.div``;
 
-  position: relative;
-
-  overflow-y: scroll;
-
-  background: #151515;
-  border-radius: 12px;
-  max-height: 80%;
-  max-width: 800px;
-  width: 800px;
-`;
-
-const CloseButton = styled.button`
+const CloseButton = styled(Icon)`
   background-color: transparent;
   border: 0;
-  color: red;
+  color: white;
   cursor: pointer;
   position: absolute;
   top: 0px;
@@ -45,17 +31,40 @@ const CloseButton = styled.button`
 const StyledModalHeader = styled.div`
   background: #111111;
   padding: 24px;
-  width: 100%;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
 `;
 
 const StyledModalFooter = styled.div`
-  padding: 1rem;
+  padding: 24px;
   display: flex;
-  justify-content: flex-end;
+`;
+
+const StyledModalWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
 `;
 
 const StyledModalContent = styled.div`
   padding: 0px 24px;
+`;
+
+const StyledModalBody = styled.div`
+  max-height: 80%;
+  max-width: 800px;
+  width: 800px;
+  z-index: 999;
+  background: #151515;
+  border-radius: 12px;
+  color: #fff;
+  position: relative;
 `;
 
 const ModalHeader = ({ children }) => (
@@ -70,15 +79,39 @@ const ModalContent = ({ children }) => (
   <StyledModalContent>{children}</StyledModalContent>
 );
 
-const Modal = ({ isOpen, children, onClose }) => {
-  return isOpen ? (
-    <ModalOverlay>
-      <StyledModalContainer>
-        <CloseButton onClick={onClose}>Close</CloseButton>
-        {children}
-      </StyledModalContainer>
-    </ModalOverlay>
-  ) : null;
+const Modal = ({ isOpen, children, onClose, closeIcon }) => {
+  const modalRef = useRef(null);
+
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      if (event.key === "Escape") {
+        onClose();
+      }
+    };
+
+    if (isOpen) {
+      document.addEventListener("keydown", handleKeyDown);
+    }
+
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [isOpen, onClose]);
+
+  return isOpen
+    ? ReactDOM.createPortal(
+        <StyledModalWrapper ref={modalRef}>
+          <ModalOverlay />
+          <StyledModalBody>
+            <StyledModalContainer>{children}</StyledModalContainer>
+            <CloseButton onClick={onClose} path={closeIcon} size={1}>
+              Close
+            </CloseButton>
+          </StyledModalBody>
+        </StyledModalWrapper>,
+        document.body
+      )
+    : null;
 };
 
 export { ModalHeader, ModalFooter, ModalContent };
