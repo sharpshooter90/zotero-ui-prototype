@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import Button from "../Button";
 import { mdiPlus, mdiCloudSync } from "@mdi/js";
+import Modal from "../Modal";
 
 const StyledHeader = styled.header`
   display: flex;
@@ -29,6 +30,7 @@ const StyledRightCol = styled.div`
 `;
 
 export default function Header() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
   return (
     <StyledHeader>
       <StyledLeftCol></StyledLeftCol>
@@ -41,9 +43,20 @@ export default function Header() {
         >
           Sync
         </Button>
-        <Button variant="primary" size="xs" leftIcon={mdiPlus} iconSize={0.8}>
+        <Button
+          variant="primary"
+          size="xs"
+          leftIcon={mdiPlus}
+          iconSize={0.8}
+          onClick={() => setIsModalOpen(true)}
+        >
           Add New
         </Button>
+        {isModalOpen && (
+          <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+            <div>This is the modal content</div>
+          </Modal>
+        )}
       </StyledRightCol>
     </StyledHeader>
   );
