@@ -1,7 +1,7 @@
-import React, { useRef, useEffect } from "react";
+import { Icon } from "@mdi/react";
+import React, { useEffect, useRef } from "react";
 import ReactDOM from "react-dom";
 import styled from "styled-components";
-import { Icon } from "@mdi/react";
 
 const ModalOverlay = styled.div`
   position: fixed;
