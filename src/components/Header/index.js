@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import Button from "../Button";
 import { mdiPlus, mdiCloudSync } from "@mdi/js";
-import Modal from "../Modal";
+import Modal, { ModalContent, ModalHeader, ModalFooter } from "../Modal";
 
 const StyledHeader = styled.header`
   display: flex;
@@ -54,7 +54,9 @@ export default function Header() {
         </Button>
         {isModalOpen && (
           <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
-            <div>This is the modal content</div>
+            <ModalHeader>This is the modal content</ModalHeader>
+            <ModalContent>Content</ModalContent>
+            <ModalFooter>Footer</ModalFooter>
           </Modal>
         )}
       </StyledRightCol>
