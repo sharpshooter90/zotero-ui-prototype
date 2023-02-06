@@ -56,7 +56,13 @@ export default {
       md: "16px",
       lg: "18px",
     },
-    fontWeight: "normal",
+    fontWeights: {
+      hairline: 100,
+      thin: 200,
+      light: 300,
+      normal: 400,
+      medium: 500,
+    },
   },
 
   shadow: {
@@ -111,7 +117,7 @@ export default {
     border: (props) => props.theme.colors[props.theme.mode].border,
     fontFamily: (props) => props.theme.typography.fontFamily,
     fontSize: (props) => props.theme.typography.fontSizes.sm,
-    fontWeight: (props) => props.theme.typography.fontWeight,
+    fontWeight: (props) => props.theme.typography.fontWeights.normal,
     borderColor: (props) => props.theme.colors[props.theme.mode].border,
     borderOnHoverColor: (props) => props.theme.colors.primaryBg,
   },
