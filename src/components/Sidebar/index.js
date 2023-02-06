@@ -5,7 +5,6 @@ import { DragSizing } from "react-drag-sizing";
 const Sidebar = ({ width, dragHandlePosition, children }) => {
   const theme = useTheme();
   const [hover, setHover] = useState(true);
-  console.log(theme.colors[theme.mode].border);
 
   const handleStyle = {
     backgroundColor: hover

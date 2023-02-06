@@ -25,7 +25,7 @@ const Collapse = ({ children, easing, position, chevron, isOpen }) => {
   return (
     <Wrapper>
       {chevron && <Chevron path={mdiChevronDown} isOpen={isOpen} />}
-      <Content isOpen={isOpen} style={{ transition: `all 0.3s ${easing}` }}>
+      <Content isOpen={isOpen} style={{ transition: `all 0.2s ${easing}` }}>
         {children}
       </Content>
     </Wrapper>
@@ -33,7 +33,7 @@ const Collapse = ({ children, easing, position, chevron, isOpen }) => {
 };
 
 Collapse.defaultProps = {
-  easing: "ease-in-out",
+  easing: "ease-in",
 };
 
 export default Collapse;

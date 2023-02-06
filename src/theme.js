@@ -110,7 +110,7 @@ export default {
     color: (props) => props.theme.colors[props.theme.mode].text,
     border: (props) => props.theme.colors[props.theme.mode].border,
     fontFamily: (props) => props.theme.typography.fontFamily,
-    fontSize: (props) => props.theme.typography.fontSize,
+    fontSize: (props) => props.theme.typography.fontSizes.sm,
     fontWeight: (props) => props.theme.typography.fontWeight,
     borderColor: (props) => props.theme.colors[props.theme.mode].border,
     borderOnHoverColor: (props) => props.theme.colors.primaryBg,
@@ -124,7 +124,7 @@ export default {
     iconColor: (props) => props.theme.colors[props.theme.mode].text,
     border: (props) => props.theme.colors[props.theme.mode].border,
     fontFamily: (props) => props.theme.typography.fontFamily,
-    fontSize: (props) => props.theme.typography.fontSize,
+    fontSize: (props) => props.theme.typography.fontSizes.sm,
     inputHoverBg: (props) =>
       rgba(props.theme.colors[props.theme.mode].background, 0.6),
   },
@@ -135,7 +135,7 @@ export default {
     color: (props) => props.theme.colors[props.theme.mode].text,
     border: (props) => props.theme.colors[props.theme.mode].border,
     fontFamily: (props) => props.theme.typography.fontFamily,
-    fontSize: (props) => props.theme.typography.fontSize,
+    fontSize: (props) => props.theme.typography.fontSizes.sm,
     onHoverIconColor: (props) =>
       rgba(props.theme.colors[props.theme.mode].text, 0.4),
   },

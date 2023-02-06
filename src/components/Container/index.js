@@ -16,6 +16,9 @@ import {
   mdiFolder,
   mdiFolderOpen,
   mdiDotsVertical,
+  mdiPlusBox,
+  mdiFile,
+  mdiBook,
 } from "@mdi/js";
 import ListSubheader from "../List/ListSubheader";
 import Collapse from "../Collapse";
@@ -27,16 +30,103 @@ const StyledContainer = styled.div`
   color: ${(props) => props.theme.textColor};
 `;
 
-const onHoverActionIcons = {
-  search: mdiMagnify,
+const ListMyLibraryOnHoverActionIcons = {
+  // search: mdiMagnify,
   // edit: mdiPencilOutline,
   // delete: mdiDeleteOutline,
   newFolder: mdiFolderPlusOutline,
   newFile: mdiFilePlusOutline,
   more: mdiDotsVertical,
 };
-const onHoverActions = Object.entries(onHoverActionIcons).map(
-  ([key, value]) => {
+
+const collectionTypeIcons = {
+  collection: mdiFolder,
+  note: mdiFile,
+  book: mdiBook,
+};
+const myLibraryCollections = {
+  collections: [
+    {
+      id: "BookReviews-1",
+      name: "Book Reviews",
+      url: "/book-reviews",
+      subcollections: [
+        {
+          id: "BookReviews-DiscussingDesign-2",
+          name: "Discussing Design",
+          type: "book",
+          url: "/book-reviews/discussing-design",
+        },
+        {
+          id: "BookReviews-NotesForThisBook-3",
+          name: "Notes for this book",
+          type: "note",
+          url: "/book-reviews/notes-for-this-book",
+        },
+      ],
+    },
+    {
+      id: "ColonialMedicine-4",
+      name: "Colonial Medicine",
+      url: "/colonial-medicine",
+      subcollections: [],
+    },
+    {
+      id: "Dissertation-5",
+      name: "Dissertation",
+      url: "/dissertation",
+      subcollections: [],
+    },
+  ],
+};
+
+const mapCollections = (
+  collections,
+  setIsOpen,
+  openItems,
+  handleClick,
+  theme
+) => {
+  return Object.values(collections).map((item, index) => {
+    const isOpen = !!openItems[item.id];
+    return (
+      <>
+        <ListItem
+          leftIcon={isOpen ? mdiFolderOpen : mdiFolder}
+          leftIconColor={theme.colors.iconFolderColor}
+          onHoverActions={mapIconsToActions(ListMyLibraryOnHoverActionIcons)}
+          onClick={() => handleClick(item.id)}
+          iconSize={0.8}
+          key={item.id}
+          itemId={item.id}
+        >
+          {item.name}
+        </ListItem>
+        {item.subcollections.map((subItem) => {
+          return (
+            <Collapse isOpen={isOpen} key={subItem.id + "wrapper"}>
+              <ListItem
+                key={subItem.id}
+                leftIcon={collectionTypeIcons[subItem.type]}
+                onHoverActions={mapIconsToActions(
+                  ListMyLibraryOnHoverActionIcons
+                )}
+                iconSize={0.8}
+                sx={{ paddingLeft: "32px" }}
+                itemId={subItem.id}
+              >
+                {subItem.name}
+              </ListItem>
+            </Collapse>
+          );
+        })}
+      </>
+    );
+  });
+};
+
+const mapIconsToActions = (icons) => {
+  return Object.entries(icons).map(([key, value, index]) => {
     return (
       <Tooltip
         title={key.replace(/([a-z0-9])([A-Z])/g, "$1 $2")}
@@ -44,20 +134,30 @@ const onHoverActions = Object.entries(onHoverActionIcons).map(
         style={{ textTransform: "lowercase" }}
         delay={600}
         size="small"
+        key={index}
       >
         <IconButton
           iconPath={value}
-          key={key}
+          key={index}
           size={0.7}
           onClick={() => console.log("action: " + key)}
         />
       </Tooltip>
     );
-  }
-);
+  });
+};
+
 export default function Container() {
   const theme = useTheme();
   const [isOpen, setIsOpen] = useState(true);
+  const [openItems, setOpenItems] = useState({});
+  const handleClick = (id) => {
+    setOpenItems({
+      ...openItems,
+      [id]: !openItems[id],
+    });
+  };
+
   return (
     <StyledContainer>
       <Sidebar width={"280px"} dragHandlePosition="right">
@@ -65,43 +165,23 @@ export default function Container() {
           <ListItem>
             <SearchInput placeholder="search" />
           </ListItem>
-          <ListSubheader>My Library</ListSubheader>
-
           <ListItem
             leftIcon={mdiHome}
-            onHoverActions={onHoverActions}
+            // onHoverActions={mapIconsToActions(mdiPlusBox)}
             iconSize={0.8}
           >
             Home
           </ListItem>
-          <ListItem
-            leftIcon={isOpen ? mdiFolderOpen : mdiFolder}
-            leftIconColor={theme.colors.iconFolderColor}
-            onHoverActions={onHoverActions}
-            onClick={() => setIsOpen(!isOpen)}
-            iconSize={0.8}
-          >
-            Expandable Parent
-          </ListItem>
-          <Collapse isOpen={isOpen}>
-            <ListItem
-              sx={{ paddingLeft: "32px" }}
-              leftIcon={mdiFolder}
-              leftIconColor={theme.colors.iconFolderColor}
-              onHoverActions={onHoverActions}
-              iconSize={0.8}
-            >
-              Expandable Children
-            </ListItem>
-          </Collapse>
-
-          <ListItem
-            leftIcon={mdiFolder}
-            onHoverActions={onHoverActions}
-            iconSize={0.8}
-          >
-            Home
-          </ListItem>
+        </List>
+        <List>
+          <ListSubheader>My Library</ListSubheader>
+          {mapCollections(
+            myLibraryCollections.collections,
+            setIsOpen,
+            openItems,
+            handleClick,
+            theme
+          )}
         </List>
       </Sidebar>
       <Main />
