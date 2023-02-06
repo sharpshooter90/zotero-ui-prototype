@@ -13,7 +13,7 @@ const ModalOverlay = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 1;
+  z-index: ${(props) => props.theme.zIndex.modal};
 `;
 
 const StyledModalContainer = styled.div``;
@@ -49,7 +49,7 @@ const StyledModalWrapper = styled.div`
   bottom: 0;
   left: 0;
   right: 0;
-  z-index: 1;
+  z-index: ${(props) => props.theme.zIndex.modal};
 `;
 
 const StyledModalContent = styled.div`
@@ -60,11 +60,11 @@ const StyledModalBody = styled.div`
   max-height: 80%;
   max-width: 800px;
   width: 800px;
-  z-index: 999;
   background: #151515;
   border-radius: 12px;
   color: #fff;
   position: relative;
+  z-index: ${(props) => props.theme.zIndex.modal};
 `;
 
 const ModalHeader = ({ children }) => (

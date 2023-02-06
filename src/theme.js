@@ -110,6 +110,11 @@ export default {
       },
     },
   },
+  zIndex: {
+    sidebar: 10,
+    header: 20,
+    modal: 30,
+  },
   sidebar: {
     width: "300px",
     background: (props) => props.theme.colors[props.theme.mode].background,
