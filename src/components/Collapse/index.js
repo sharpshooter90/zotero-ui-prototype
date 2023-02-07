@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import { mdiChevronDown, mdiChevronUp } from "@mdi/js";
+import { mdiChevronDown } from "@mdi/js";
 import { Icon } from "@mdi/react";
+import React from "react";
 import styled from "styled-components";
 
 const Wrapper = styled.div`

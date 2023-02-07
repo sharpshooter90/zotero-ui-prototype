@@ -11,7 +11,7 @@ const brandBlueShade = "#64D2FF";
 const darkShade = "#111";
 const lightShade = "#fff";
 
-export default {
+const theme = {
   mode: "dark",
   backgroundColor: backgroundColor,
   textColor: "#fff",
@@ -172,3 +172,5 @@ export default {
     background: (props) => props.theme.colors[props.theme.mode].cardBackground,
   },
 };
+
+export default theme;
