@@ -1,11 +1,11 @@
 import { mdiBook, mdiClose, mdiCloudSync, mdiPlus } from "@mdi/js";
 import { Icon } from "@mdi/react";
+import { rgba } from "polished";
 import React, { useState } from "react";
 import styled, { useTheme } from "styled-components";
 import { FontStyle, FontWeight, Heading, Span } from "styled-typography";
 import Button from "../Button";
 import Modal, { ModalContent, ModalHeader } from "../Modal";
-
 import SearchInput from "../SearchInput";
 
 const StyledHeader = styled.header`
@@ -33,24 +33,24 @@ const StyledRightCol = styled.div`
   gap: 10px;
 `;
 const CardContainer = styled.div`
-  /* Auto layout */
-
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-
   gap: 10px;
-
   width: 175px;
   height: 112px;
-
-  flex: none;
   order: 0;
-  flex-grow: 1;
+  flex-grow: 0;
   padding: ${(props) => props.theme.spacing.lg};
   border-radius: 0.5rem;
   box-shadow: 0 0.1rem 0.5rem rgba(0, 0, 0, 0.1);
   background-color: ${(props) => props.theme.card.background};
+  transition: all 0.2s ease-in-out;
+
+  &:hover {
+    cursor: pointer;
+    background: ${rgba("black", 0.4)};
+  }
 `;
 
 const StyledCardWrapper = styled.div`
