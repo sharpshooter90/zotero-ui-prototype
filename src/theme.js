@@ -1,4 +1,3 @@
-import { hover } from "@testing-library/user-event/dist/hover";
 import { rgba } from "polished";
 
 const backgroundColor = "#151515";
@@ -9,6 +8,8 @@ const buttonSecondaryBg = secondaryBg;
 const borderColor = "#343434";
 const primaryFontFamily = "Inter, sans-serif";
 const brandBlueShade = "#64D2FF";
+const darkShade = "#111";
+const lightShade = "#fff";
 
 export default {
   mode: "dark",
@@ -41,11 +42,14 @@ export default {
       background: "#fff",
       text: "#333",
       border: borderColor,
+      cardBackground: lightShade,
     },
     dark: {
       background: "#333",
       text: "#fff",
       border: borderColor,
+
+      cardBackground: darkShade,
     },
   },
   typography: {
@@ -149,5 +153,8 @@ export default {
     fontSize: (props) => props.theme.typography.fontSizes.sm,
     onHoverIconColor: (props) =>
       rgba(props.theme.colors[props.theme.mode].text, 0.4),
+  },
+  card: {
+    background: (props) => props.theme.colors[props.theme.mode].cardBackground,
   },
 };

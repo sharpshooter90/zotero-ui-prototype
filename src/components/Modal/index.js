@@ -53,7 +53,7 @@ const StyledModalWrapper = styled.div`
 `;
 
 const StyledModalContent = styled.div`
-  padding: 0px 24px;
+  padding: ${(props) => props.theme.spacing.md};
 `;
 
 const StyledModalBody = styled.div`

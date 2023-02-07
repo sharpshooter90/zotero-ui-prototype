@@ -1,9 +1,11 @@
-import { mdiClose, mdiCloudSync, mdiPlus } from "@mdi/js";
+import { mdiBook, mdiClose, mdiCloudSync, mdiPlus } from "@mdi/js";
+import { Icon } from "@mdi/react";
 import React, { useState } from "react";
-import styled from "styled-components";
-import { FontStyle, FontWeight, Span } from "styled-typography";
+import styled, { useTheme } from "styled-components";
+import { FontStyle, FontWeight, Heading, Span } from "styled-typography";
 import Button from "../Button";
-import Modal, { ModalContent, ModalFooter, ModalHeader } from "../Modal";
+import Modal, { ModalContent, ModalHeader } from "../Modal";
+
 import SearchInput from "../SearchInput";
 
 const StyledHeader = styled.header`
@@ -30,8 +32,85 @@ const StyledRightCol = styled.div`
   align-items: center;
   gap: 10px;
 `;
+const CardContainer = styled.div`
+  /* Auto layout */
 
-const createNewModal = ({ isModalOpen, setIsModalOpen }) => {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  gap: 10px;
+
+  width: 175px;
+  height: 112px;
+
+  flex: none;
+  order: 0;
+  flex-grow: 1;
+  padding: ${(props) => props.theme.spacing.lg};
+  border-radius: 0.5rem;
+  box-shadow: 0 0.1rem 0.5rem rgba(0, 0, 0, 0.1);
+  background-color: ${(props) => props.theme.card.background};
+`;
+
+const StyledCardWrapper = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+`;
+
+const templates = [
+  {
+    id: `name-1-${Math.random()}`,
+    name: "Journal Article",
+    type: "Journal Article",
+    description:
+      "A scholarly article written by one or more authors, usually published in a peer-reviewed journal.",
+  },
+  {
+    id: `name-2-${Math.random()}`,
+    name: "Book",
+    type: "Book",
+    description:
+      "A collection of written works or compositions that have been published as a collection or in separate volumes.",
+  },
+  {
+    id: `name-3-${Math.random()}`,
+    name: "Website",
+    type: "Website",
+    description:
+      "A set of related web pages served from a single web domain and accessible via the Internet.",
+  },
+  {
+    id: `name-4-${Math.random()}`,
+    name: "Thesis",
+    type: "Thesis",
+    description:
+      "A long written essay or dissertation on a particular subject, especially one submitted for a university degree.",
+  },
+  {
+    id: `name-5-${Math.random()}`,
+    name: "Conference Paper",
+    type: "Conference Paper",
+    description:
+      "A paper presented at a conference, symposium, or similar event.",
+  },
+];
+
+const templateCards = templates.map((template) => (
+  <CardContainer key={template.id}>
+    <Icon path={mdiBook} size={1} />
+    <Span
+      level={5}
+      fontWeight={FontWeight.Regular}
+      fontStyle={FontStyle.Normal}
+    >
+      {template.name}
+    </Span>
+  </CardContainer>
+));
+
+const createNewModal = ({ isModalOpen, setIsModalOpen, theme }) => {
   return isModalOpen ? (
     <Modal
       isOpen={isModalOpen}
@@ -39,27 +118,26 @@ const createNewModal = ({ isModalOpen, setIsModalOpen }) => {
       closeIcon={mdiClose}
     >
       <ModalHeader>
-        <Span
-          level={4}
-          fontWeight={FontWeight.Medium}
-          fontStyle={FontStyle.Normal}
-          color="#fff"
-          lineHeight={1.3}
-        >
-          Hello, World!
-        </Span>
+        <Heading color={theme.colors[theme.mode].text}>
+          Search by metadata of
+        </Heading>
         <div>
           <SearchInput placeholder="ISBNs, DOIs, PMIDs, arXiv IDs, ADS Bibcodes" />
         </div>
       </ModalHeader>
-      <ModalContent>Content</ModalContent>
-      <ModalFooter>Footer</ModalFooter>
+      <ModalContent>
+        <Heading color={theme.colors[theme.mode].text}>
+          Or add new from a template
+        </Heading>
+        <StyledCardWrapper>{templateCards}</StyledCardWrapper>
+      </ModalContent>
     </Modal>
   ) : null;
 };
 
 export default function Header() {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const theme = useTheme();
   return (
     <StyledHeader>
       <StyledLeftCol></StyledLeftCol>
@@ -81,7 +159,7 @@ export default function Header() {
         >
           Add New
         </Button>
-        {createNewModal({ isModalOpen, setIsModalOpen })}
+        {createNewModal({ isModalOpen, setIsModalOpen, theme })}
       </StyledRightCol>
     </StyledHeader>
   );
