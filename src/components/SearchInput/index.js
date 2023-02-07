@@ -1,17 +1,24 @@
 import { mdiMagnify } from "@mdi/js";
 import Icon from "@mdi/react";
 import React, { useState } from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 const SearchInputContainer = styled.div`
   display: flex;
   align-items: center;
   border-radius: 4px;
 
-  background: ${(props) =>
-    props.theme.searchInput.variants[props.variant].background};
-  padding: ${(props) =>
-    props.theme.searchInput.variants[props.variant].padding};
+  ${(props) =>
+    props.variant === "borderStyle" &&
+    css`
+      background: ${(props) =>
+        props.theme.searchInput.variants[props.variant].background};
+      padding: ${(props) =>
+        props.theme.searchInput.variants[props.variant].padding};
+      border: 2px solid
+        ${(props) =>
+          props.theme.searchInput.variants[props.variant].borderColor};
+    `};
   box-shadow: ${({ theme }) => theme.shadow.searchInput};
   gap: 4px;
   &:hover {

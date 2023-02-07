@@ -59,6 +59,10 @@ const StyledCardWrapper = styled.div`
   gap: 12px;
 `;
 
+const StyledHeading = styled(Heading)`
+  margin-bottom: 12px;
+`;
+
 const templates = [
   {
     id: `name-1-${Math.random()}`,
@@ -118,9 +122,9 @@ const createNewModal = ({ isModalOpen, setIsModalOpen, theme }) => {
       closeIcon={mdiClose}
     >
       <ModalHeader>
-        <Heading color={theme.colors[theme.mode].text}>
+        <StyledHeading color={theme.colors[theme.mode].text}>
           Search by metadata of
-        </Heading>
+        </StyledHeading>
         <div>
           <SearchInput
             placeholder="ISBNs, DOIs, PMIDs, arXiv IDs, ADS Bibcodes"
@@ -129,9 +133,9 @@ const createNewModal = ({ isModalOpen, setIsModalOpen, theme }) => {
         </div>
       </ModalHeader>
       <ModalContent>
-        <Heading color={theme.colors[theme.mode].text}>
+        <StyledHeading color={theme.colors[theme.mode].text}>
           Or add new from a template
-        </Heading>
+        </StyledHeading>
         <StyledCardWrapper>{templateCards}</StyledCardWrapper>
       </ModalContent>
     </Modal>
