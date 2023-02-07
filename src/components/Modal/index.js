@@ -24,8 +24,9 @@ const CloseButton = styled(Icon)`
   color: white;
   cursor: pointer;
   position: absolute;
-  top: 0px;
-  right: 0px;
+  top: 8px;
+  right: 8px;
+  color: ${(props) => props.theme.colors[props.theme.mode].iconColor};
 `;
 
 const StyledModalHeader = styled.div`

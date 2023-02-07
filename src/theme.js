@@ -48,7 +48,7 @@ export default {
       background: "#333",
       text: "#fff",
       border: borderColor,
-
+      iconColor: rgba(lightShade, 0.8),
       cardBackground: darkShade,
     },
   },
@@ -149,7 +149,8 @@ export default {
           rgba(props.theme.colors[props.theme.mode].background, 0),
       },
       borderStyle: {
-        background: (props) => props.theme.colors[props.theme.mode].background,
+        background: (props) =>
+          rgba(props.theme.colors[props.theme.mode].background, 0.4),
         borderColor: (props) => props.theme.colors[props.theme.mode].border,
         padding: (props) => props.theme.spacing.md,
       },
