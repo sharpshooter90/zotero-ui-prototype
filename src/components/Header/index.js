@@ -122,7 +122,10 @@ const createNewModal = ({ isModalOpen, setIsModalOpen, theme }) => {
           Search by metadata of
         </Heading>
         <div>
-          <SearchInput placeholder="ISBNs, DOIs, PMIDs, arXiv IDs, ADS Bibcodes" />
+          <SearchInput
+            placeholder="ISBNs, DOIs, PMIDs, arXiv IDs, ADS Bibcodes"
+            variant="borderStyle"
+          />
         </div>
       </ModalHeader>
       <ModalContent>
