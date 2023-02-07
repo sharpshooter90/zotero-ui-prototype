@@ -1,7 +1,6 @@
+import { rgba } from "polished";
 import React, { useState } from "react";
 import styled from "styled-components";
-import { rgba } from "polished";
-import Icon from "@mdi/react";
 
 const StyledHoverActions = styled.div`
   display: flex;

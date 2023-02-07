@@ -1,8 +1,8 @@
-import React from "react";
-import styled, { css } from "styled-components";
 import { Icon } from "@mdi/react";
+import React from "react";
+import styled from "styled-components";
 
-const Button = styled.button`
+const StyledButton = styled.button`
   border: none;
   border-radius: 4px;
   padding: ${({ theme, size }) => theme.button.spacing[size]};
@@ -36,7 +36,7 @@ Button.defaultProps = {
   disabled: false,
 };
 
-export default ({
+export default function Button({
   variant = "primary",
   size = "md",
   iconSize = 1,
@@ -45,10 +45,17 @@ export default ({
   rightIcon,
   children,
   onClick,
-}) => (
-  <Button variant={variant} size={size} disabled={disabled} onClick={onClick}>
-    {leftIcon && <Icon path={leftIcon} size={iconSize} />}
-    {children}
-    {rightIcon && <Icon path={rightIcon} size={iconSize} />}
-  </Button>
-);
+}) {
+  return (
+    <StyledButton
+      variant={variant}
+      size={size}
+      disabled={disabled}
+      onClick={onClick}
+    >
+      {leftIcon && <Icon path={leftIcon} size={iconSize} />}
+      {children}
+      {rightIcon && <Icon path={rightIcon} size={iconSize} />}
+    </StyledButton>
+  );
+}
