@@ -56,11 +56,11 @@ const StyledInput = styled.input`
   color: ${({ theme }) => theme.searchInput.color};
 `;
 
-const SearchInput = ({ placeholder, variant = "borderStyle" }) => {
+const SearchInput = ({ placeholder, variant = "borderStyle", onClick }) => {
   const [searchValue, setSearchValue] = useState("");
 
   return (
-    <SearchInputContainer variant={variant}>
+    <SearchInputContainer variant={variant} onClick={onClick}>
       <Icon path={mdiMagnify} />
       <StyledInput
         type="text"

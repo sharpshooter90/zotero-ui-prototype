@@ -1,5 +1,6 @@
 import {
   mdiBook,
+  mdiClose,
   mdiDotsVertical,
   mdiFile,
   mdiFilePlusOutline,
@@ -18,6 +19,7 @@ import IconButton from "../IconButton";
 import { List, ListItem } from "../List";
 import ListSubheader from "../List/ListSubheader";
 import Main from "../Main";
+import Modal, { ModalContent, ModalHeader } from "../Modal";
 import SearchInput from "../SearchInput";
 import Sidebar from "../Sidebar";
 
@@ -83,13 +85,20 @@ const myLibraryCollections = {
   ],
 };
 
-const mapCollections = (
-  collections,
-  setIsOpen,
-  openItems,
-  handleClick,
-  theme
-) => {
+const searchModal = ({ isModalOpen, setIsModalOpen, theme }) => {
+  return isModalOpen ? (
+    <Modal
+      isOpen={isModalOpen}
+      onClose={() => setIsModalOpen(false)}
+      closeIcon={mdiClose}
+    >
+      <ModalHeader>test</ModalHeader>
+      <ModalContent>test</ModalContent>
+    </Modal>
+  ) : null;
+};
+
+const mapCollections = (collections, openItems, handleClick, theme) => {
   return Object.values(collections).map((item, index) => {
     const isOpen = !!openItems[item.id];
     return (
@@ -152,7 +161,7 @@ const mapIconsToActions = (icons) => {
 
 export default function Container() {
   const theme = useTheme();
-  const [isOpen, setIsOpen] = useState(true);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [openItems, setOpenItems] = useState({});
   const handleClick = (id) => {
     setOpenItems({
@@ -166,7 +175,11 @@ export default function Container() {
       <Sidebar width={"280px"} dragHandlePosition="right">
         <List>
           <ListItem>
-            <SearchInput placeholder="search" variant="default" />
+            <SearchInput
+              placeholder="search"
+              variant="default"
+              onClick={() => setIsModalOpen(true)}
+            />
           </ListItem>
           <ListItem leftIcon={mdiHome} iconSize={0.8}>
             Home
@@ -180,7 +193,6 @@ export default function Container() {
           </ListSubheader>
           {mapCollections(
             myLibraryCollections.collections,
-            setIsOpen,
             openItems,
             handleClick,
             theme
@@ -191,6 +203,7 @@ export default function Container() {
       <Sidebar width={"280px"} dragHandlePosition="left">
         right sidebar
       </Sidebar>
+      {searchModal({ isModalOpen, setIsModalOpen, theme })}
     </StyledContainer>
   );
 }
