@@ -9,6 +9,13 @@ const SearchInputContainer = styled.div`
   border-radius: 4px;
 
   ${(props) =>
+    props.variant === "default" &&
+    css`
+      padding: ${(props) =>
+        props.theme.searchInput.variants[props.variant].padding};
+    `};
+
+  ${(props) =>
     props.variant === "borderStyle" &&
     css`
       background: ${(props) =>
@@ -56,7 +63,7 @@ const StyledInput = styled.input`
   color: ${({ theme }) => theme.searchInput.color};
 `;
 
-const SearchInput = ({ placeholder, variant = "borderStyle", onClick }) => {
+const SearchInput = ({ placeholder, variant, onClick }) => {
   const [searchValue, setSearchValue] = useState("");
 
   return (

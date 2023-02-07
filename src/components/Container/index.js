@@ -177,7 +177,6 @@ export default function Container() {
           <ListItem>
             <SearchInput
               placeholder="search"
-              variant="default"
               onClick={() => setIsModalOpen(true)}
             />
           </ListItem>

@@ -147,6 +147,7 @@ export default {
       default: {
         background: (props) =>
           rgba(props.theme.colors[props.theme.mode].background, 0),
+        padding: (props) => props.theme.spacing.sm,
       },
       borderStyle: {
         background: (props) =>
