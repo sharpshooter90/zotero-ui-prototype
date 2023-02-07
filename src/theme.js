@@ -142,6 +142,18 @@ export default {
     fontSize: (props) => props.theme.typography.fontSizes.sm,
     inputHoverBg: (props) =>
       rgba(props.theme.colors[props.theme.mode].background, 0.6),
+
+    variants: {
+      default: {
+        background: (props) =>
+          rgba(props.theme.colors[props.theme.mode].background, 0),
+      },
+      borderStyle: {
+        background: (props) => props.theme.colors[props.theme.mode].background,
+        borderColor: (props) => props.theme.colors[props.theme.mode].border,
+        padding: (props) => props.theme.spacing.md,
+      },
+    },
   },
   ListItem: {
     background: (props) => props.theme.colors[props.theme.mode].background,

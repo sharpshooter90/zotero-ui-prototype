@@ -166,7 +166,7 @@ export default function Container() {
       <Sidebar width={"280px"} dragHandlePosition="right">
         <List>
           <ListItem>
-            <SearchInput placeholder="search" />
+            <SearchInput placeholder="search" variant="default" />
           </ListItem>
           <ListItem leftIcon={mdiHome} iconSize={0.8}>
             Home

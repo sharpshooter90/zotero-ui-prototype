@@ -1,13 +1,17 @@
+import { mdiMagnify } from "@mdi/js";
+import Icon from "@mdi/react";
 import React, { useState } from "react";
 import styled from "styled-components";
-import Icon from "@mdi/react";
-import { mdiMagnify } from "@mdi/js";
 
 const SearchInputContainer = styled.div`
   display: flex;
   align-items: center;
   border-radius: 4px;
-  background-color: ${({ theme }) => theme.searchInput.background};
+
+  background: ${(props) =>
+    props.theme.searchInput.variants[props.variant].background};
+  padding: ${(props) =>
+    props.theme.searchInput.variants[props.variant].padding};
   box-shadow: ${({ theme }) => theme.shadow.searchInput};
   gap: 4px;
   &:hover {
@@ -45,15 +49,16 @@ const StyledInput = styled.input`
   color: ${({ theme }) => theme.searchInput.color};
 `;
 
-const SearchInput = ({ placeholder }) => {
+const SearchInput = ({ placeholder, variant = "borderStyle" }) => {
   const [searchValue, setSearchValue] = useState("");
 
   return (
-    <SearchInputContainer>
+    <SearchInputContainer variant={variant}>
       <Icon path={mdiMagnify} />
       <StyledInput
         type="text"
         placeholder={placeholder}
+        variant={variant}
         value={searchValue}
         onChange={(e) => setSearchValue(e.target.value)}
       />
