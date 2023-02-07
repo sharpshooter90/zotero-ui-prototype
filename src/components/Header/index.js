@@ -3,7 +3,6 @@ import { Icon } from "@mdi/react";
 import { rgba } from "polished";
 import React, { useState } from "react";
 import styled, { useTheme } from "styled-components";
-import { FontStyle, FontWeight, Heading, Span } from "styled-typography";
 import Button from "../Button";
 import Modal, { ModalContent, ModalHeader } from "../Modal";
 import SearchInput from "../SearchInput";
@@ -59,8 +58,15 @@ const StyledCardWrapper = styled.div`
   gap: 12px;
 `;
 
-const StyledHeading = styled(Heading)`
+const StyledHeading = styled.div`
   margin-bottom: 12px;
+`;
+
+const StyledSectionHeader = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
 `;
 
 const templates = [
@@ -104,13 +110,7 @@ const templates = [
 const templateCards = templates.map((template) => (
   <CardContainer key={template.id}>
     <Icon path={mdiBook} size={1} />
-    <Span
-      level={5}
-      fontWeight={FontWeight.Regular}
-      fontStyle={FontStyle.Normal}
-    >
-      {template.name}
-    </Span>
+    <span>{template.name}</span>
   </CardContainer>
 ));
 
@@ -123,7 +123,7 @@ const createNewModal = ({ isModalOpen, setIsModalOpen, theme }) => {
     >
       <ModalHeader>
         <StyledHeading color={theme.colors[theme.mode].text}>
-          Search by metadata of
+          Search by metadata
         </StyledHeading>
         <div>
           <SearchInput
@@ -133,9 +133,12 @@ const createNewModal = ({ isModalOpen, setIsModalOpen, theme }) => {
         </div>
       </ModalHeader>
       <ModalContent>
-        <StyledHeading color={theme.colors[theme.mode].text}>
-          Or add new from a template
-        </StyledHeading>
+        <StyledSectionHeader>
+          <StyledHeading color={theme.colors[theme.mode].text}>
+            Add new from a template
+          </StyledHeading>
+          <SearchInput placeholder="Search in templates" variant="default" />
+        </StyledSectionHeader>
         <StyledCardWrapper>{templateCards}</StyledCardWrapper>
       </ModalContent>
     </Modal>

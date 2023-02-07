@@ -1,6 +1,5 @@
-import React from "react";
 import Icon from "@mdi/react";
-import { mdiHome } from "@mdi/js";
+import React from "react";
 import styled from "styled-components";
 
 const StyledIconButton = styled.button`
@@ -18,9 +17,9 @@ const StyledIconButton = styled.button`
   }
 `;
 
-const IconButton = ({ iconPath, onClick, size }) => (
+const IconButton = ({ iconPath, onClick, size, iconColor }) => (
   <StyledIconButton onClick={onClick}>
-    <Icon path={iconPath} size={size} />
+    <Icon path={iconPath} size={size} color={iconColor} />
   </StyledIconButton>
 );
 

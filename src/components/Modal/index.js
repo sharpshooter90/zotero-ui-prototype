@@ -1,7 +1,7 @@
-import { Icon } from "@mdi/react";
 import React, { useEffect, useRef } from "react";
 import ReactDOM from "react-dom";
-import styled from "styled-components";
+import styled, { useTheme } from "styled-components";
+import IconButton from "../IconButton";
 
 const ModalOverlay = styled.div`
   position: fixed;
@@ -18,7 +18,7 @@ const ModalOverlay = styled.div`
 
 const StyledModalContainer = styled.div``;
 
-const CloseButton = styled(Icon)`
+const CloseButton = styled.div`
   background-color: transparent;
   border: 0;
   color: white;
@@ -26,7 +26,6 @@ const CloseButton = styled(Icon)`
   position: absolute;
   top: 8px;
   right: 8px;
-  color: ${(props) => props.theme.colors[props.theme.mode].iconColor};
 `;
 
 const StyledModalHeader = styled.div`
@@ -82,6 +81,7 @@ const ModalContent = ({ children }) => (
 
 const Modal = ({ isOpen, children, onClose, closeIcon }) => {
   const modalRef = useRef(null);
+  const theme = useTheme();
 
   useEffect(() => {
     const handleKeyDown = (event) => {
@@ -105,8 +105,13 @@ const Modal = ({ isOpen, children, onClose, closeIcon }) => {
           <ModalOverlay />
           <StyledModalBody>
             <StyledModalContainer>{children}</StyledModalContainer>
-            <CloseButton onClick={onClose} path={closeIcon} size={1}>
-              Close
+            <CloseButton>
+              <IconButton
+                onClick={onClose}
+                iconPath={closeIcon}
+                size={1}
+                iconColor={theme.colors[theme.mode].iconColor}
+              ></IconButton>
             </CloseButton>
           </StyledModalBody>
         </StyledModalWrapper>,
