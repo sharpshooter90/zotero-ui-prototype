@@ -8,7 +8,7 @@ const buttonSecondaryBg = secondaryBg;
 const borderColor = "#343434";
 const primaryFontFamily = "Inter, sans-serif";
 const brandBlueShade = "#64D2FF";
-const darkShade = "#111";
+const darkShade = "#272727";
 const lightShade = "#fff";
 
 const theme = {

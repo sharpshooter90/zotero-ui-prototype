@@ -53,6 +53,8 @@ const StyledModalWrapper = styled.div`
 `;
 
 const StyledModalContent = styled.div`
+  overflow: scroll;
+  height: 400px;
   padding: ${(props) => props.theme.spacing.md};
 `;
 

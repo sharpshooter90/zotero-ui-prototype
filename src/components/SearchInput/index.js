@@ -63,7 +63,7 @@ const StyledInput = styled.input`
   color: ${({ theme }) => theme.searchInput.color};
 `;
 
-const SearchInput = ({ placeholder, variant, onClick }) => {
+const SearchInput = ({ placeholder, variant, onClick, ...props }) => {
   const [searchValue, setSearchValue] = useState("");
 
   return (
@@ -75,6 +75,7 @@ const SearchInput = ({ placeholder, variant, onClick }) => {
         variant={variant}
         value={searchValue}
         onChange={(e) => setSearchValue(e.target.value)}
+        autoFocus={props.autoFocus}
       />
     </SearchInputContainer>
   );
