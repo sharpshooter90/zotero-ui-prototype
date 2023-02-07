@@ -1,27 +1,25 @@
-import React, { useState } from "react";
-import styled, { useTheme } from "styled-components";
-import { Tooltip } from "react-tippy";
-import Sidebar from "../Sidebar";
-import Main from "../Main";
-import { List, ListItem } from "../List";
-import SearchInput from "../SearchInput";
-import IconButton from "../IconButton";
 import {
-  mdiPencilOutline,
-  mdiDeleteOutline,
-  mdiFolderPlusOutline,
+  mdiBook,
+  mdiDotsVertical,
+  mdiFile,
   mdiFilePlusOutline,
-  mdiMagnify,
-  mdiHome,
   mdiFolder,
   mdiFolderOpen,
-  mdiDotsVertical,
+  mdiFolderPlusOutline,
+  mdiHome,
+  mdiMagnify,
   mdiPlus,
-  mdiFile,
-  mdiBook,
 } from "@mdi/js";
-import ListSubheader from "../List/ListSubheader";
+import React, { useState } from "react";
+import { Tooltip } from "react-tippy";
+import styled, { useTheme } from "styled-components";
 import Collapse from "../Collapse";
+import IconButton from "../IconButton";
+import { List, ListItem } from "../List";
+import ListSubheader from "../List/ListSubheader";
+import Main from "../Main";
+import SearchInput from "../SearchInput";
+import Sidebar from "../Sidebar";
 
 const StyledContainer = styled.div`
   display: flex;
