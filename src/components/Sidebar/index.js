@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import styled, { useTheme } from "styled-components";
 import { DragSizing } from "react-drag-sizing";
+import { useTheme } from "styled-components";
 
 const Sidebar = ({ width, dragHandlePosition, children }) => {
   const theme = useTheme();
