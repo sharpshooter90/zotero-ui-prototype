@@ -171,7 +171,7 @@ const createNewModal = ({ isModalOpen, setIsModalOpen, theme }) => {
         <StyledCardWrapper>{templateCards}</StyledCardWrapper>
         <br />
         <Button variant="secondary" style={{ flex: 1 }}>
-          Show All
+          Show all (29 items)
         </Button>
       </ModalContent>
     </Modal>
