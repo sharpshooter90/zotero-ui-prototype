@@ -5,7 +5,7 @@ import styled from "styled-components";
 
 const ListStyled = styled.ul`
   padding: 0;
-  margin: 8px 0;
+  margin: 14px 0;
 `;
 
 const ListItemStyled = styled.li`

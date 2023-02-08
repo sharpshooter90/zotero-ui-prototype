@@ -49,7 +49,7 @@ const collectionTypeIcons = {
   note: mdiFile,
   book: mdiBook,
 };
-const myLibraryCollections = {
+const sidebarNavItems = {
   collections: [
     {
       id: "BookReviews-1",
@@ -83,6 +83,34 @@ const myLibraryCollections = {
       subcollections: [],
     },
   ],
+  groupCollections: [
+    {
+      id: "designGroup-1",
+      name: "Design Group",
+      url: "/design-group",
+      subcollections: [],
+    },
+    {
+      id: "research-group-1",
+      name: "Research Group",
+      url: "/research-group",
+      subcollections: [],
+    },
+  ],
+  feeds: [
+    {
+      id: "feed-1",
+      name: "Tech Feed",
+      url: "/tech-feed",
+      subcollections: [],
+    },
+    {
+      id: "aquatic-feed-1",
+      name: "Aquatic Feed",
+      url: "/aquatic-feed",
+      subcollections: [],
+    },
+  ],
 };
 
 const searchModal = ({ isModalOpen, setIsModalOpen, theme }) => {
@@ -99,35 +127,35 @@ const searchModal = ({ isModalOpen, setIsModalOpen, theme }) => {
 };
 
 const mapCollections = (collections, openItems, handleClick, theme) => {
-  return Object.values(collections).map((item, index) => {
-    const isOpen = !!openItems[item.id];
+  return Object.values(collections).map((collecton, index) => {
+    const isOpen = !!openItems[collecton.id];
     return (
       <React.Fragment key={index}>
         <ListItem
           leftIcon={isOpen ? mdiFolderOpen : mdiFolder}
           leftIconColor={theme.colors.iconFolderColor}
           onHoverActions={mapIconsToActions(ListMyLibraryOnHoverActionIcons)}
-          onClick={() => handleClick(item.id)}
+          onClick={() => handleClick(collecton.id)}
           iconSize={0.8}
-          key={item.id}
-          itemId={item.id}
+          key={collecton.id}
+          itemId={collecton.id}
         >
-          {item.name}
+          {collecton.name}
         </ListItem>
-        {item.subcollections.map((subItem) => {
+        {collecton.subcollections.map((subCollection) => {
           return (
-            <Collapse isOpen={isOpen} key={subItem.id + "wrapper"}>
+            <Collapse isOpen={isOpen} key={subCollection.id + "wrapper"}>
               <ListItem
-                key={subItem.id}
-                leftIcon={collectionTypeIcons[subItem.type]}
+                key={subCollection.id}
+                leftIcon={collectionTypeIcons[subCollection.type]}
                 onHoverActions={mapIconsToActions(
                   ListMyLibraryOnHoverActionIcons
                 )}
                 iconSize={0.8}
                 sx={{ paddingLeft: "32px" }}
-                itemId={subItem.id}
+                itemId={subCollection.id}
               >
-                {subItem.name}
+                {subCollection.name}
               </ListItem>
             </Collapse>
           );
@@ -191,11 +219,32 @@ export default function Container() {
             My Library
           </ListSubheader>
           {mapCollections(
-            myLibraryCollections.collections,
+            sidebarNavItems.collections,
             openItems,
             handleClick,
             theme
           )}
+        </List>
+        <List>
+          <ListSubheader
+            onHoverActions={mapIconsToActions(myLibraryOnHoverActionIcons)}
+          >
+            Group Collections
+          </ListSubheader>
+          {mapCollections(
+            sidebarNavItems.groupCollections,
+            openItems,
+            handleClick,
+            theme
+          )}
+        </List>
+        <List>
+          <ListSubheader
+            onHoverActions={mapIconsToActions(myLibraryOnHoverActionIcons)}
+          >
+            Feeds
+          </ListSubheader>
+          {mapCollections(sidebarNavItems.feeds, openItems, handleClick, theme)}
         </List>
       </Sidebar>
       <Main />
