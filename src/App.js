@@ -1,15 +1,19 @@
 import React from "react";
-import { ThemeProvider } from "styled-components";
-import Header from "./components/Header";
-import Container from "./components/Container";
-import theme from "./theme";
+import { BrowserRouter as Router } from "react-router-dom";
 import "react-tippy/dist/tippy.css";
+import { ThemeProvider } from "styled-components";
+
+import Container from "./components/Container";
+import Header from "./components/Header";
+import theme from "./theme";
 
 function App() {
   return (
     <ThemeProvider theme={theme}>
-      <Header />
-      <Container />
+      <Router>
+        <Header />
+        <Container />
+      </Router>
     </ThemeProvider>
   );
 }
