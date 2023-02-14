@@ -1,7 +1,7 @@
-import Icon from "@mdi/react";
+import { Icon } from "@mdi/react";
 import { rgba } from "polished";
 import React, { useState } from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 const ListStyled = styled.ul`
   padding: 0;
@@ -9,7 +9,13 @@ const ListStyled = styled.ul`
 `;
 
 const ListItemStyled = styled.li`
-  background-color: transparent;
+  ${(props) =>
+    props.isActive &&
+    css`
+      background-color: ${(props) =>
+        props.isActive ? props.theme.ListItem.backgroundHover : "transparent"};
+    `};
+
   padding: ${(props) => props.theme.spacing.xs};
   font-size: ${(props) => props.theme.typography.fontSizes.sm};
   display: flex;

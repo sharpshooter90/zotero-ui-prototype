@@ -3,6 +3,7 @@ import {
   mdiClose,
   mdiDotsVertical,
   mdiFile,
+  mdiFileDocument,
   mdiFilePlusOutline,
   mdiFolder,
   mdiFolderOpen,
@@ -12,8 +13,10 @@ import {
   mdiPlus,
 } from "@mdi/js";
 import React, { useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Tooltip } from "react-tippy";
 import styled, { useTheme } from "styled-components";
+import RouterConfig from "../../routes";
 import Collapse from "../Collapse";
 import IconButton from "../IconButton";
 import { List, ListItem } from "../List";
@@ -29,7 +32,10 @@ const StyledContainer = styled.div`
   background: ${(props) => props.theme.backgroundColor};
   color: ${(props) => props.theme.textColor};
 `;
-
+const StyledLink = styled(Link)`
+  color: ${(props) => props.theme.colors[props.theme.mode].text};
+  text-decoration: none;
+`;
 const ListMyLibraryOnHoverActionIcons = {
   // search: mdiMagnify,
   // edit: mdiPencilOutline,
@@ -48,6 +54,7 @@ const collectionTypeIcons = {
   collection: mdiFolder,
   note: mdiFile,
   book: mdiBook,
+  document: mdiFileDocument,
 };
 const sidebarNavItems = {
   collections: [
@@ -59,7 +66,7 @@ const sidebarNavItems = {
         {
           id: "BookReviews-DiscussingDesign-2",
           name: "Discussing Design",
-          type: "book",
+          type: "document",
           url: "/book-reviews/discussing-design",
         },
         {
@@ -126,37 +133,47 @@ const searchModal = ({ isModalOpen, setIsModalOpen, theme }) => {
   ) : null;
 };
 
-const mapCollections = (collections, openItems, handleClick, theme) => {
-  return Object.values(collections).map((collecton, index) => {
-    const isOpen = !!openItems[collecton.id];
+const mapCollections = (
+  collections,
+  openItems,
+  listItemOnClick,
+  theme,
+  href
+) => {
+  return Object.values(collections).map((collection, index) => {
+    const isOpen = !!openItems[collection.id];
     return (
       <React.Fragment key={index}>
         <ListItem
           leftIcon={isOpen ? mdiFolderOpen : mdiFolder}
           leftIconColor={theme.colors.iconFolderColor}
           onHoverActions={mapIconsToActions(ListMyLibraryOnHoverActionIcons)}
-          onClick={() => handleClick(collecton.id)}
+          onClick={() => listItemOnClick(collection)}
           iconSize={0.8}
-          key={collecton.id}
-          itemId={collecton.id}
+          key={collection.id}
+          itemId={collection.id}
         >
-          {collecton.name}
+          {collection.name}
         </ListItem>
-        {collecton.subcollections.map((subCollection) => {
+
+        {collection.subcollections.map((subCollection) => {
           return (
             <Collapse isOpen={isOpen} key={subCollection.id + "wrapper"}>
-              <ListItem
-                key={subCollection.id}
-                leftIcon={collectionTypeIcons[subCollection.type]}
-                onHoverActions={mapIconsToActions(
-                  ListMyLibraryOnHoverActionIcons
-                )}
-                iconSize={0.8}
-                sx={{ paddingLeft: "32px" }}
-                itemId={subCollection.id}
-              >
-                {subCollection.name}
-              </ListItem>
+              <StyledLink to={subCollection.url}>
+                <ListItem
+                  key={subCollection.id}
+                  leftIcon={collectionTypeIcons[subCollection.type]}
+                  onHoverActions={mapIconsToActions(
+                    ListMyLibraryOnHoverActionIcons
+                  )}
+                  iconSize={0.8}
+                  sx={{ paddingLeft: "32px" }}
+                  itemId={subCollection.id}
+                  isActive={href === subCollection.url ? true : false}
+                >
+                  {subCollection.name}
+                </ListItem>
+              </StyledLink>
             </Collapse>
           );
         })}
@@ -191,12 +208,24 @@ export default function Container() {
   const theme = useTheme();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [openItems, setOpenItems] = useState({});
-  const handleClick = (id) => {
-    setOpenItems({
-      ...openItems,
-      [id]: !openItems[id],
-    });
+  const listItemOnClick = (collection) => {
+    const initialActiveItem = collection.subcollections[0];
+
+    setOpenItems({ ...openItems, [collection.id]: !openItems[collection.id] });
+    if (initialActiveItem) {
+      navigate(initialActiveItem.url);
+    } else {
+      alert(
+        "THIS FOLDER IS EMPTY" +
+          "\n\n" +
+          "NOTE: this is a prototype to showcase interactions, some features may not work as expected"
+      );
+    }
   };
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const href = location.pathname;
 
   return (
     <StyledContainer>
@@ -208,9 +237,16 @@ export default function Container() {
               onClick={() => setIsModalOpen(true)}
             />
           </ListItem>
-          <ListItem leftIcon={mdiHome} iconSize={0.8}>
-            Home
-          </ListItem>
+
+          <StyledLink to="/home">
+            <ListItem
+              leftIcon={mdiHome}
+              iconSize={0.8}
+              isActive={href === "/home" ? true : false}
+            >
+              Home
+            </ListItem>
+          </StyledLink>
         </List>
         <List>
           <ListSubheader
@@ -221,8 +257,9 @@ export default function Container() {
           {mapCollections(
             sidebarNavItems.collections,
             openItems,
-            handleClick,
-            theme
+            listItemOnClick,
+            theme,
+            href
           )}
         </List>
         <List>
@@ -234,7 +271,7 @@ export default function Container() {
           {mapCollections(
             sidebarNavItems.groupCollections,
             openItems,
-            handleClick,
+            listItemOnClick,
             theme
           )}
         </List>
@@ -244,10 +281,17 @@ export default function Container() {
           >
             Feeds
           </ListSubheader>
-          {mapCollections(sidebarNavItems.feeds, openItems, handleClick, theme)}
+          {mapCollections(
+            sidebarNavItems.feeds,
+            openItems,
+            listItemOnClick,
+            theme
+          )}
         </List>
       </Sidebar>
-      <Main />
+      <Main>
+        <RouterConfig />
+      </Main>
       <Sidebar width={"280px"} dragHandlePosition="left">
         right sidebar
       </Sidebar>
