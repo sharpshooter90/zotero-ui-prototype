@@ -33,7 +33,7 @@ const StyledAction = styled.div`
   }
 `;
 const SubheaderContainer = styled.div`
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 500;
   padding: 8px 16px;
   line-height: 15px;

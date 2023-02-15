@@ -34,7 +34,11 @@ const theme = {
     lightgray: "rgba(108, 117, 125, 0.05)",
     primaryHover: rgba(secondaryBg, 0.6),
     secondaryHover: rgba(secondaryBg, 0.4),
-    iconFolderColor: brandBlueShade,
+    collectionTypeColors: {
+      collections: brandBlueShade,
+      groupCollections: "#9564ff",
+      feeds: "#ffed64",
+    },
 
     surface: backgroundColor,
     // themeing specific colors

@@ -6,11 +6,12 @@ import {
   mdiFileDocument,
   mdiFilePlusOutline,
   mdiFolder,
-  mdiFolderOpen,
+  mdiFolderAccount,
   mdiFolderPlusOutline,
   mdiHome,
   mdiMagnify,
   mdiPlus,
+  mdiRssBox,
 } from "@mdi/js";
 import React, { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
@@ -61,12 +62,18 @@ const collectionTypeIcons = {
   book: mdiBook,
   document: mdiFileDocument,
 };
+const sidebarTypeIcons = {
+  collections: mdiFolder,
+  groupCollections: mdiFolderAccount,
+  feeds: mdiRssBox,
+};
 const sidebarNavItems = {
   collections: [
     {
       id: "BookReviews-1",
       name: "Book Reviews",
       url: "/book-reviews",
+      type: "collections",
       subcollections: [
         {
           id: "BookReviews-DiscussingDesign-2",
@@ -86,12 +93,14 @@ const sidebarNavItems = {
       id: "ColonialMedicine-4",
       name: "Colonial Medicine",
       url: "/colonial-medicine",
+      type: "collections",
       subcollections: [],
     },
     {
       id: "Dissertation-5",
       name: "Dissertation",
       url: "/dissertation",
+      type: "collections",
       subcollections: [],
     },
   ],
@@ -100,12 +109,14 @@ const sidebarNavItems = {
       id: "designGroup-1",
       name: "Design Group",
       url: "/design-group",
+      type: "groupCollections",
       subcollections: [],
     },
     {
       id: "research-group-1",
       name: "Research Group",
       url: "/research-group",
+      type: "groupCollections",
       subcollections: [],
     },
   ],
@@ -114,12 +125,14 @@ const sidebarNavItems = {
       id: "feed-1",
       name: "Tech Feed",
       url: "/tech-feed",
+      type: "feeds",
       subcollections: [],
     },
     {
       id: "aquatic-feed-1",
       name: "Aquatic Feed",
       url: "/aquatic-feed",
+      type: "feeds",
       subcollections: [],
     },
   ],
@@ -150,8 +163,12 @@ const mapCollections = (
     return (
       <React.Fragment key={index}>
         <ListItem
-          leftIcon={isOpen ? mdiFolderOpen : mdiFolder}
-          leftIconColor={theme.colors.iconFolderColor}
+          leftIcon={
+            isOpen
+              ? sidebarTypeIcons[collection.type]
+              : sidebarTypeIcons[collection.type]
+          }
+          leftIconColor={theme.colors.collectionTypeColors[collection.type]}
           onHoverActions={mapIconsToActions(ListMyLibraryOnHoverActionIcons)}
           onClick={() => listItemOnClick(collection)}
           iconSize={0.8}
@@ -191,7 +208,7 @@ const mapCollections = (
               iconSize={0.8}
               sx={{ paddingLeft: "32px" }}
             >
-              <StyledMutedText>Create New</StyledMutedText>
+              <StyledMutedText>Empty</StyledMutedText>
             </ListItem>
           </Collapse>
         )}
