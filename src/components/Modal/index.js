@@ -29,7 +29,7 @@ const CloseButton = styled.div`
 `;
 
 const StyledModalHeader = styled.div`
-  background: #111111;
+  background: #1f1e1e;
   padding: 24px;
   border-top-left-radius: 12px;
   border-top-right-radius: 12px;
