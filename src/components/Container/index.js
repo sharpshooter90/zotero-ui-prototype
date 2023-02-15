@@ -211,8 +211,11 @@ export default function Container() {
   const listItemOnClick = (collection) => {
     const initialActiveItem = collection.subcollections[0];
 
-    setOpenItems({ ...openItems, [collection.id]: !openItems[collection.id] });
     if (initialActiveItem) {
+      setOpenItems({
+        ...openItems,
+        [collection.id]: !openItems[collection.id],
+      });
       navigate(initialActiveItem.url);
     } else {
       alert(
