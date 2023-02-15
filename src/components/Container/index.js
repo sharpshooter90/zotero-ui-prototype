@@ -15,6 +15,8 @@ import {
 import React, { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Tooltip } from "react-tippy";
+
+import { rgba } from "polished";
 import styled, { useTheme } from "styled-components";
 import RouterConfig from "../../routes";
 import Collapse from "../Collapse";
@@ -35,6 +37,9 @@ const StyledContainer = styled.div`
 const StyledLink = styled(Link)`
   color: ${(props) => props.theme.colors[props.theme.mode].text};
   text-decoration: none;
+`;
+const StyledMutedText = styled.div`
+  color: ${(props) => rgba(props.theme.colors[props.theme.mode].text, 0.5)};
 `;
 const ListMyLibraryOnHoverActionIcons = {
   // search: mdiMagnify,
@@ -155,28 +160,41 @@ const mapCollections = (
         >
           {collection.name}
         </ListItem>
-
-        {collection.subcollections.map((subCollection) => {
-          return (
-            <Collapse isOpen={isOpen} key={subCollection.id + "wrapper"}>
-              <StyledLink to={subCollection.url}>
-                <ListItem
-                  key={subCollection.id}
-                  leftIcon={collectionTypeIcons[subCollection.type]}
-                  onHoverActions={mapIconsToActions(
-                    ListMyLibraryOnHoverActionIcons
-                  )}
-                  iconSize={0.8}
-                  sx={{ paddingLeft: "32px" }}
-                  itemId={subCollection.id}
-                  isActive={href === subCollection.url ? true : false}
-                >
-                  {subCollection.name}
-                </ListItem>
-              </StyledLink>
-            </Collapse>
-          );
-        })}
+        {collection.subcollections.length > 0 ? (
+          collection.subcollections.map((subCollection) => {
+            return (
+              <Collapse isOpen={isOpen} key={subCollection.id + "wrapper"}>
+                <StyledLink to={subCollection.url}>
+                  <ListItem
+                    key={subCollection.id}
+                    leftIcon={collectionTypeIcons[subCollection.type]}
+                    onHoverActions={mapIconsToActions(
+                      ListMyLibraryOnHoverActionIcons
+                    )}
+                    iconSize={0.8}
+                    sx={{ paddingLeft: "32px" }}
+                    itemId={subCollection.id}
+                    isActive={href === subCollection.url ? true : false}
+                  >
+                    {subCollection.name}
+                  </ListItem>
+                </StyledLink>
+              </Collapse>
+            );
+          })
+        ) : (
+          <Collapse isOpen={isOpen} key={collection.id + "_noSubItems"}>
+            <ListItem
+              onHoverActions={mapIconsToActions(
+                ListMyLibraryOnHoverActionIcons
+              )}
+              iconSize={0.8}
+              sx={{ paddingLeft: "32px" }}
+            >
+              <StyledMutedText>Create New</StyledMutedText>
+            </ListItem>
+          </Collapse>
+        )}
       </React.Fragment>
     );
   });
@@ -209,21 +227,10 @@ export default function Container() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [openItems, setOpenItems] = useState({});
   const listItemOnClick = (collection) => {
-    const initialActiveItem = collection.subcollections[0];
-
-    if (initialActiveItem) {
-      setOpenItems({
-        ...openItems,
-        [collection.id]: !openItems[collection.id],
-      });
-      navigate(initialActiveItem.url);
-    } else {
-      alert(
-        "THIS FOLDER IS EMPTY" +
-          "\n\n" +
-          "NOTE: this is a prototype to showcase interactions, some features may not work as expected"
-      );
-    }
+    setOpenItems({
+      ...openItems,
+      [collection.id]: !openItems[collection.id],
+    });
   };
   const location = useLocation();
   const navigate = useNavigate();
