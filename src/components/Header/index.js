@@ -9,10 +9,9 @@ import {
   mdiNotebook,
   mdiPlus,
 } from "@mdi/js";
-import { Icon } from "@mdi/react";
-import { rgba } from "polished";
 import React, { useState } from "react";
 import styled, { useTheme } from "styled-components";
+import ActionCard from "../ActionCard";
 import Button from "../Button";
 import Modal, { ModalContent, ModalHeader } from "../Modal";
 import SearchInput from "../SearchInput";
@@ -40,31 +39,6 @@ const StyledRightCol = styled.div`
   display: flex;
   align-items: center;
   gap: 10px;
-`;
-const CardContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  gap: 10px;
-  width: 175px;
-  height: 86px;
-  order: 0;
-  flex-grow: 1;
-  padding: ${(props) => props.theme.spacing.lg};
-  border-radius: 0.5rem;
-  box-shadow: 0 0.1rem 0.5rem rgba(0, 0, 0, 0.1);
-  background-color: ${(props) => props.theme.card.background};
-  transition: all 0.2s ease-in-out;
-
-  &:nth-last-of-type(-n + 2) {
-    flex: 0;
-    min-width: 179px;
-  }
-
-  &:hover {
-    cursor: pointer;
-    background: ${rgba("#272727", 0.4)};
-  }
 `;
 
 const StyledCardWrapper = styled.div`
@@ -132,14 +106,15 @@ const templates = [
 ];
 
 const templateCards = templates.map((template) => (
-  <CardContainer key={template.id}>
+  <React.Fragment>
     {template.type && (
-      <React.Fragment key={"templateIcon_" + template.id}>
-        <Icon path={templateIcons[template.type]} size={1} />
-        <span>{template.name}</span>
-      </React.Fragment>
+      <ActionCard
+        key={template.id}
+        iconPath={templateIcons[template.type]}
+        title={template.name}
+      />
     )}
-  </CardContainer>
+  </React.Fragment>
 ));
 
 const createNewModal = ({ isModalOpen, setIsModalOpen, theme }) => {
