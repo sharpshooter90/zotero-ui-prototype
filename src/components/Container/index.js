@@ -182,7 +182,11 @@ const mapCollections = (
         {collection.subcollections.length > 0 ? (
           collection.subcollections.map((subCollection) => {
             return (
-              <Collapse isOpen={isOpen} key={subCollection.id + "wrapper"}>
+              <Collapse
+                isOpen={isOpen}
+                key={subCollection.id + "wrapper"}
+                as="li"
+              >
                 <StyledLink to={subCollection.url}>
                   <ListItem
                     key={subCollection.id}

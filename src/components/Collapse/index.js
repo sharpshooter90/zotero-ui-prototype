@@ -21,9 +21,9 @@ const Content = styled.div`
   width: 100%;
 `;
 
-const Collapse = ({ children, easing, position, chevron, isOpen }) => {
+const Collapse = ({ children, easing, position, chevron, isOpen, as }) => {
   return (
-    <Wrapper>
+    <Wrapper as={as}>
       {chevron && <Chevron path={mdiChevronDown} isOpen={isOpen} />}
       <Content isOpen={isOpen} style={{ transition: `all 0.2s ${easing}` }}>
         {children}

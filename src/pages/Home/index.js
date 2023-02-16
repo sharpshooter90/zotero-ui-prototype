@@ -1,4 +1,4 @@
-import { mdiBook, mdiCloudSync, mdiPlusBox, mdiPuzzle } from "@mdi/js";
+import { mdiCloudSync, mdiFileDocument, mdiPlusBox, mdiPuzzle } from "@mdi/js";
 import React, { useContext, useEffect } from "react";
 import styled from "styled-components";
 import ActionCard from "../../components/ActionCard";
@@ -29,7 +29,7 @@ const categoriesIcons = {
   ],
   recents: [
     {
-      book: mdiBook,
+      document: mdiFileDocument,
       onboardingAction_stayInSync: mdiCloudSync,
       onboardingAction_browserExtension: mdiPuzzle,
     },
@@ -73,7 +73,7 @@ const categories = {
   recents: [
     {
       name: "Discussing design by Adam Connor",
-      type: "book",
+      type: "document",
       description: "book 1 description",
       id: "book-discussing-design-1",
     },
@@ -106,7 +106,7 @@ const Home = () => {
 
   useEffect(() => {
     setIsRightSidebarVisible(false);
-  }, [setIsRightSidebarVisible]);
+  }, []);
 
   return (
     <div>
