@@ -75,6 +75,7 @@ const ListItem = ({
   onClick,
   sx,
   itemId,
+  as,
 }) => {
   const [hover, setHover] = useState(false);
   return (
@@ -85,6 +86,7 @@ const ListItem = ({
       onClick={onClick}
       style={sx}
       id={itemId}
+      as={as}
     >
       {leftIcon && (
         <Icon path={leftIcon} size={iconSize} color={leftIconColor} />

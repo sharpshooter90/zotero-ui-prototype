@@ -1,8 +1,16 @@
 import React from "react";
+import styled from "styled-components";
+
+const StyledContent = styled.div`
+  p,
+  li {
+    padding: 3px 2px;
+  }
+`;
 
 const DiscussingDesignDocument = () => {
   return (
-    <div>
+    <StyledContent>
       <p>
         Book description Real critique has become a lost skill among
         collaborative teams today. Critique is intended to help teams strengthen
@@ -35,7 +43,7 @@ const DiscussingDesignDocument = () => {
           situations
         </li>
       </ul>
-    </div>
+    </StyledContent>
   );
 };
 

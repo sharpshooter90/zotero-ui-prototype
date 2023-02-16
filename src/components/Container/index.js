@@ -198,6 +198,7 @@ const mapCollections = (
                     sx={{ paddingLeft: "32px" }}
                     itemId={subCollection.id}
                     isActive={href === subCollection.url ? true : false}
+                    as="div"
                   >
                     {subCollection.name}
                   </ListItem>
