@@ -1,3 +1,4 @@
+import { mdiBook, mdiCloudSync, mdiPlusBox, mdiPuzzle } from "@mdi/js";
 import React, { useContext, useEffect } from "react";
 import styled from "styled-components";
 import ActionCard from "../../components/ActionCard";
@@ -17,6 +18,37 @@ const StyledSectionTitle = styled.h2`
 const StyledSection = styled.div`
   margin-bottom: 32px; ;
 `;
+
+const categoriesIcons = {
+  actions: [
+    {
+      default: mdiPlusBox,
+      onboardingAction_stayInSync: mdiCloudSync,
+      onboardingAction_browserExtension: mdiPuzzle,
+    },
+  ],
+  recents: [
+    {
+      book: mdiBook,
+      onboardingAction_stayInSync: mdiCloudSync,
+      onboardingAction_browserExtension: mdiPuzzle,
+    },
+  ],
+  actions: [
+    {
+      default: mdiPlusBox,
+      onboardingAction_stayInSync: mdiCloudSync,
+      onboardingAction_browserExtension: mdiPuzzle,
+    },
+  ],
+  tutorials: [
+    {
+      default: mdiPlusBox,
+      onboardingAction_stayInSync: mdiCloudSync,
+      onboardingAction_browserExtension: mdiPuzzle,
+    },
+  ],
+};
 const categories = {
   actions: [
     {
@@ -27,23 +59,29 @@ const categories = {
     },
     {
       name: "Connect to Web",
-      type: "onboardingActions",
+      type: "onboardingAction_stayInSync",
       description: "Connect to Web",
       id: "connect-to-web-1",
+    },
+    {
+      name: "Install Browser Extension",
+      type: "onboardingAction_browserExtension",
+      description: "browser extension setup",
+      id: "install-browser-extension-1",
     },
   ],
   recents: [
     {
-      name: "Recent 1",
-      type: "recent",
-      description: "Recent 1 description",
-      id: "recent-1",
+      name: "Discussing design by Adam Connor",
+      type: "book",
+      description: "book 1 description",
+      id: "book-discussing-design-1",
     },
     {
-      name: "Recent 2",
-      type: "recent",
-      description: "Recent 2 description",
-      id: "recent-2",
+      name: "Community discussion",
+      type: "feeds",
+      description: "feeds 2 description",
+      id: "feeds-community-discussion-2",
     },
   ],
   tutorials: [
@@ -77,7 +115,12 @@ const Home = () => {
           <StyledSectionTitle>{categoryName}</StyledSectionTitle>
           <StyledCardWrapper>
             {items.map((item) => (
-              <ActionCard key={item.id} title={item.name} />
+              <ActionCard
+                key={item.id}
+                title={item.name}
+                iconPath={categoriesIcons[categoryName][0][item.type]}
+                sx={{ minHeight: "140px", minWidth: "306px", flex: 0 }}
+              />
             ))}
           </StyledCardWrapper>
         </StyledSection>

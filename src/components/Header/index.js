@@ -44,7 +44,18 @@ const StyledRightCol = styled.div`
 const StyledCardWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
-  gap: 12px;
+  --columns: 3;
+  --gap: 12px;
+  --gap-count: calc(var(--columns) - 1);
+  display: flex;
+  gap: var(--gap);
+
+  > div {
+    flex-basis: calc(
+      calc(100% / var(--columns)) -
+        calc(var(--gap) / var(--columns) * var(--gap-count))
+    );
+  }
 `;
 
 const StyledHeading = styled.div`

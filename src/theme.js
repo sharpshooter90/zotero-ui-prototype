@@ -174,6 +174,7 @@ const theme = {
   },
   card: {
     background: (props) => props.theme.colors[props.theme.mode].cardBackground,
+    fontSize: (props) => props.theme.typography.fontSizes.sm,
   },
 };
 
