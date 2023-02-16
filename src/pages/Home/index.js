@@ -1,4 +1,11 @@
-import { mdiCloudSync, mdiFileDocument, mdiPlusBox, mdiPuzzle } from "@mdi/js";
+import {
+  mdiCloudSync,
+  mdiFileDocument,
+  mdiNote,
+  mdiPlusBox,
+  mdiPuzzle,
+  mdiRssBox,
+} from "@mdi/js";
 import React, { useContext, useEffect } from "react";
 import styled from "styled-components";
 import ActionCard from "../../components/ActionCard";
@@ -30,8 +37,7 @@ const categoriesIcons = {
   recents: [
     {
       document: mdiFileDocument,
-      onboardingAction_stayInSync: mdiCloudSync,
-      onboardingAction_browserExtension: mdiPuzzle,
+      note: mdiNote,
     },
   ],
   actions: [
@@ -43,9 +49,7 @@ const categoriesIcons = {
   ],
   tutorials: [
     {
-      default: mdiPlusBox,
-      onboardingAction_stayInSync: mdiCloudSync,
-      onboardingAction_browserExtension: mdiPuzzle,
+      feeds: mdiRssBox,
     },
   ],
 };
@@ -78,22 +82,22 @@ const categories = {
       id: "book-discussing-design-1",
     },
     {
-      name: "Community discussion",
-      type: "feeds",
-      description: "feeds 2 description",
-      id: "feeds-community-discussion-2",
+      name: "Note for design",
+      type: "note",
+      description: "Note 2 description",
+      id: "note-community-discussion-2",
     },
   ],
   tutorials: [
     {
       name: "Tutorial 1",
-      type: "tutorial",
+      type: "feeds",
       description: "Tutorial 1 description",
       id: "tutorial-1",
     },
     {
       name: "Tutorial 2",
-      type: "tutorial",
+      type: "feeds",
       description: "Tutorial 2 description",
       id: "tutorial-2",
     },

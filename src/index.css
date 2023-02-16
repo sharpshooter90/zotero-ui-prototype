@@ -14,11 +14,6 @@ code {
     monospace;
 }
 
-p,
-li {
-  padding: 3px 2px;
-}
-
 /* tippy.js content style */
 .tippy-tooltip-content {
   text-transform: lowercase;
