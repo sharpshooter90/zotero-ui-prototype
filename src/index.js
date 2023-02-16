@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 import { BrowserRouter as Router } from "react-router-dom";
 import "./lex-styles.css";
 // organize-imports-disable-next-line
+import "@csstools/normalize.css";
 import App from "./App";
 import "./index.css";
 
