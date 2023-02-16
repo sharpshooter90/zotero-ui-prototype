@@ -13,12 +13,14 @@ import {
   mdiPlus,
   mdiRssBox,
 } from "@mdi/js";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Tooltip } from "react-tippy";
 
 import { rgba } from "polished";
 import styled, { useTheme } from "styled-components";
+
+import { RightSidebarContext } from "../../context.config";
 import RouterConfig from "../../routes";
 import Collapse from "../Collapse";
 import IconButton from "../IconButton";
@@ -254,6 +256,8 @@ export default function Container() {
 
   const href = location.pathname;
 
+  const { isRightSidebarVisible } = useContext(RightSidebarContext);
+
   return (
     <StyledContainer>
       <Sidebar width={"280px"} dragHandlePosition="right">
@@ -319,9 +323,13 @@ export default function Container() {
       <Main>
         <RouterConfig />
       </Main>
-      <Sidebar width={"280px"} dragHandlePosition="left">
-        right sidebar
-      </Sidebar>
+
+      {isRightSidebarVisible && (
+        <Sidebar width={"280px"} dragHandlePosition="left">
+          right sidebar
+        </Sidebar>
+      )}
+
       {searchModal({ isModalOpen, setIsModalOpen, theme })}
     </StyledContainer>
   );
