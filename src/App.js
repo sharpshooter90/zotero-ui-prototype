@@ -14,8 +14,6 @@ function App() {
   const location = useLocation();
 
   useEffect(() => {
-    setIsRightSidebarVisible(true); // set default value for isRightSidebarVisible
-
     // reset isRightSidebarVisible to false when location changes
     return () => {
       setIsRightSidebarVisible(true);
