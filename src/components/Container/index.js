@@ -207,13 +207,14 @@ const mapCollections = (
             );
           })
         ) : (
-          <Collapse isOpen={isOpen} key={collection.id + "_noSubItems"}>
+          <Collapse isOpen={isOpen} key={collection.id + "_noSubItems"} as="li">
             <ListItem
               onHoverActions={mapIconsToActions(
                 ListMyLibraryOnHoverActionIcons
               )}
               iconSize={0.8}
               sx={{ paddingLeft: "32px" }}
+              as="div"
             >
               <StyledMutedText>Empty</StyledMutedText>
             </ListItem>
