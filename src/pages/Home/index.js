@@ -6,9 +6,10 @@ import {
   mdiPuzzle,
   mdiRssBox,
 } from "@mdi/js";
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import ActionCard from "../../components/ActionCard";
+import CreateNewActionModal from "../../components/CreateNewActionModal";
 import { RightSidebarContext } from "../../context.config";
 
 const StyledCardWrapper = styled.div`
@@ -60,6 +61,7 @@ const categories = {
       type: "default",
       description: "Add New Action",
       id: "add-new-1",
+      actionType: "createNew",
     },
     {
       name: "Connect to Web",
@@ -80,6 +82,7 @@ const categories = {
       type: "document",
       description: "book 1 description",
       id: "book-discussing-design-1",
+      url: "/book-reviews/discussing-design",
     },
     {
       name: "Note for design",
@@ -111,6 +114,13 @@ const Home = () => {
   useEffect(() => {
     setIsRightSidebarVisible(false);
   }, []);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const categoriesActions = [
+    {
+      createNew: () => setIsModalOpen(true),
+    },
+  ];
 
   return (
     <div>
@@ -124,11 +134,19 @@ const Home = () => {
                 title={item.name}
                 iconPath={categoriesIcons[categoryName][0][item.type]}
                 sx={{ minHeight: "140px", minWidth: "306px", flex: 0 }}
+                onClick={
+                  item.actionType ? categoriesActions[0][item.actionType] : null
+                }
+                linkTo={item.url || undefined}
               />
             ))}
           </StyledCardWrapper>
         </StyledSection>
       ))}
+      <CreateNewActionModal
+        isModalOpen={isModalOpen}
+        setIsModalOpen={setIsModalOpen}
+      />
     </div>
   );
 };
