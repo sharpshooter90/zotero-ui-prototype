@@ -2,6 +2,7 @@ import { mdiPlusBox } from "@mdi/js";
 import Icon from "@mdi/react";
 import { rgba } from "polished";
 import React from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 const StyledCardContainer = styled.div`
@@ -34,11 +35,27 @@ const StyledCardTitle = styled.div`
   font-size: ${(props) => props.theme.card.fontSize};
 `;
 
-const ActionCard = ({ iconPath, iconSize, title, sx }) => {
-  return (
-    <StyledCardContainer style={sx}>
+const StyledLink = styled(Link)`
+  color: ${(props) => props.theme.colors[props.theme.mode].text};
+  text-decoration: none;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+`;
+
+const ActionCard = ({ iconPath, iconSize, title, sx, onClick, linkTo }) => {
+  return linkTo === undefined ? (
+    <StyledCardContainer style={sx} onClick={onClick}>
       <Icon path={iconPath || mdiPlusBox} size={iconSize || 1} />
       <StyledCardTitle>{title}</StyledCardTitle>
+    </StyledCardContainer>
+  ) : (
+    <StyledCardContainer style={sx} onClick={onClick}>
+      <StyledLink to={linkTo}>
+        <Icon path={iconPath || mdiPlusBox} size={iconSize || 1} />
+        <StyledCardTitle>{title}</StyledCardTitle>
+      </StyledLink>
     </StyledCardContainer>
   );
 };
