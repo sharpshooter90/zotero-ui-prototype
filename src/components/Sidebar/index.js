@@ -6,12 +6,15 @@ import { useTheme } from "styled-components";
 const Sidebar = ({ width, dragHandlePosition, children }) => {
   const theme = useTheme();
   const [isDragging, setIsDragging] = useState(false);
+  const [handlerWidth, setHandlerWidth] = useState(1);
   const handleEditorSizingStart = () => {
     setIsDragging(true);
+    setHandlerWidth(3);
   };
 
   const handleEditorSizingEnd = () => {
     setIsDragging(false);
+    setHandlerWidth(1);
   };
 
   return (
@@ -25,12 +28,12 @@ const Sidebar = ({ width, dragHandlePosition, children }) => {
           ? theme.colors.primaryBg
           : theme.colors[theme.mode].border,
         border:
-          "2px solid" + isDragging
+          "3px solid" + isDragging
             ? rgba(theme.colors.primaryBg, 0.5)
             : "initial",
         transition: "background-color ease-in 0.2s",
       }}
-      handlerWidth={1}
+      handlerWidth={handlerWidth}
       style={{ minWidth: width }}
     >
       {children}
