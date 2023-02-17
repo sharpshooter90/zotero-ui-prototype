@@ -16,7 +16,7 @@ const ListItemStyled = styled.li`
         props.isActive ? props.theme.ListItem.backgroundHover : "transparent"};
     `};
 
-  padding: ${(props) => props.theme.spacing.xs};
+  padding: 8px 18px;
   font-size: ${(props) => props.theme.typography.fontSizes.sm};
   display: flex;
   align-items: center;
