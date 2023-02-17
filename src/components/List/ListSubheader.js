@@ -35,7 +35,7 @@ const StyledAction = styled.div`
 const SubheaderContainer = styled.div`
   font-size: 12px;
   font-weight: 500;
-  padding: 8px 16px;
+  padding: 8px 18px;
   line-height: 15px;
   position: relative;
   /* identical to box height */

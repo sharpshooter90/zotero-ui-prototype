@@ -2,15 +2,23 @@ import React from "react";
 import styled from "styled-components";
 
 const StyledContent = styled.div`
+  width: 800px;
+  margin: 0 auto;
+  ul {
+    padding-left: 20px;
+  }
+
   p,
   li {
     padding: 3px 2px;
+    line-height: 1.4;
   }
 `;
 
 const DiscussingDesignDocument = () => {
   return (
     <StyledContent>
+      <h2>Discussing Design</h2>
       <p>
         Book description Real critique has become a lost skill among
         collaborative teams today. Critique is intended to help teams strengthen
@@ -43,6 +51,30 @@ const DiscussingDesignDocument = () => {
           situations
         </li>
       </ul>
+      <p>
+        "Discussing Design: Improving Communication and Collaboration Through
+        Critique" by Aaron Irizarry and Adam Connor offers a comprehensive guide
+        to improving collaboration in design teams through critique. The book
+        covers the fundamentals of design critique and criticism, providing
+        effective strategies such as how to set the stage for productive
+        conversations and how to provide constructive feedback. It also includes
+        advice on how to receive feedback, establish trust between team members,
+        and manage difficult conversations. By following the strategies outlined
+        in this book, design teams can foster a culture of collaboration and
+        communication that leads to better results. #111
+      </p>
+      <p>
+        "Discussing Design: Improving Communication and Collaboration Through
+        Critique" by Aaron Irizarry and Adam Connor offers a comprehensive guide
+        to improving collaboration in design teams through critique. The book
+        covers the fundamentals of design critique and criticism, providing
+        effective strategies such as how to set the stage for productive
+        conversations and how to provide constructive feedback. It also includes
+        advice on how to receive feedback, establish trust between team members,
+        and manage difficult conversations. By following the strategies outlined
+        in this book, design teams can foster a culture of collaboration and
+        communication that leads to better results. #111
+      </p>
     </StyledContent>
   );
 };
