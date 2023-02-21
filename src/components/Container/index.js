@@ -13,14 +13,14 @@ import {
   mdiPlus,
   mdiRssBox,
 } from "@mdi/js";
-import React, { useContext, useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 import { Tooltip } from "react-tippy";
 
 import { rgba } from "polished";
 import styled, { useTheme } from "styled-components";
 
-import { RightSidebarContext, useSidebar } from "../../context.config";
+import { useSidebar } from "../../context.config";
 import RouterConfig from "../../routes";
 import Collapse from "../Collapse";
 import IconButton from "../IconButton";
@@ -257,11 +257,9 @@ export default function Container() {
     });
   };
   const location = useLocation();
-  const navigate = useNavigate();
 
   const href = location.pathname;
 
-  const { isRightSidebarVisible } = useContext(RightSidebarContext);
   const { isLeftSidebarOpen, isRightSidebarOpen } = useSidebar();
 
   return (
@@ -335,16 +333,14 @@ export default function Container() {
         <RouterConfig />
       </Main>
 
-      {isRightSidebarVisible && (
-        <Sidebar
-          isOpen={isRightSidebarOpen}
-          width={"280px"}
-          dragHandlePosition="left"
-          position="right"
-        >
-          right sidebar
-        </Sidebar>
-      )}
+      <Sidebar
+        isOpen={isRightSidebarOpen}
+        width={"280px"}
+        dragHandlePosition="left"
+        position="right"
+      >
+        right sidebar
+      </Sidebar>
 
       {searchModal({ isModalOpen, setIsModalOpen, theme })}
     </StyledContainer>
