@@ -30,6 +30,8 @@ import Main from "../Main";
 import Modal, { ModalContent, ModalHeader } from "../Modal";
 import SearchInput from "../SearchInput";
 import Sidebar from "../Sidebar";
+import Tag from "../Tag";
+
 const StyledContainer = styled.div`
   display: flex;
   height: calc(100vh - 67px);
@@ -43,6 +45,13 @@ const StyledLink = styled(Link)`
 const StyledMutedText = styled.div`
   color: ${(props) => rgba(props.theme.colors[props.theme.mode].text, 0.5)};
 `;
+
+const StyledTags = styled.div`
+  margin-top: 12px;
+  display: flex;
+  gap: 8px;
+`;
+
 const ListMyLibraryOnHoverActionIcons = {
   // search: mdiMagnify,
   // edit: mdiPencilOutline,
@@ -138,6 +147,32 @@ const sidebarNavItems = {
     },
   ],
 };
+const tagsData = [
+  {
+    name: "Filter by tags",
+    leftIcon: mdiPlus,
+    rightIcon: mdiClose,
+    onClick: () => console.log("Clicked Tag 1"),
+  },
+  {
+    name: "Only search title",
+    leftIcon: mdiPlus,
+    rightIcon: mdiClose,
+    onClick: () => console.log("Clicked Tag 2"),
+  },
+  {
+    name: "Creator",
+    leftIcon: mdiPlus,
+    rightIcon: mdiClose,
+    onClick: () => console.log("Clicked Tag 3"),
+  },
+  {
+    name: "year",
+    leftIcon: mdiPlus,
+    rightIcon: mdiClose,
+    onClick: () => console.log("Clicked Tag 3"),
+  },
+];
 
 const searchModal = ({ isModalOpen, setIsModalOpen, theme }) => {
   return isModalOpen ? (
@@ -146,7 +181,25 @@ const searchModal = ({ isModalOpen, setIsModalOpen, theme }) => {
       onClose={() => setIsModalOpen(false)}
       closeIcon={mdiClose}
     >
-      <ModalHeader>test</ModalHeader>
+      <ModalHeader>
+        <SearchInput
+          placeholder="Search"
+          variant="borderStyle"
+          autoFocus={true}
+        />
+        <StyledTags>
+          {tagsData.map((tag, index) => (
+            <Tag
+              key={tag.name + index}
+              title={tag.name}
+              leftIcon={tag.leftIcon}
+              rightIcon={tag.rightIcon}
+              onClick={tag.onClick}
+              size="small"
+            />
+          ))}
+        </StyledTags>
+      </ModalHeader>
       <ModalContent>test</ModalContent>
     </Modal>
   ) : null;
