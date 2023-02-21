@@ -4,7 +4,7 @@ import {
   mdiNote,
   mdiPlusBox,
   mdiPuzzle,
-  mdiRssBox,
+  mdiVideo,
 } from "@mdi/js";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
@@ -41,16 +41,9 @@ const categoriesIcons = {
       note: mdiNote,
     },
   ],
-  actions: [
-    {
-      default: mdiPlusBox,
-      onboardingAction_stayInSync: mdiCloudSync,
-      onboardingAction_browserExtension: mdiPuzzle,
-    },
-  ],
   tutorials: [
     {
-      feeds: mdiRssBox,
+      feeds: mdiVideo,
     },
   ],
 };
@@ -108,11 +101,12 @@ const categories = {
 };
 
 const Home = () => {
-  const { rightToggleSidebar } = useSidebar();
+  const { setRightIsSidebarOpen } = useSidebar();
 
   useEffect(() => {
-    rightToggleSidebar(false);
-  }, []);
+    setRightIsSidebarOpen(false);
+  }, [setRightIsSidebarOpen]);
+
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const categoriesActions = [

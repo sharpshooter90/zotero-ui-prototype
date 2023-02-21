@@ -1,10 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 
-const RightSidebarContext = React.createContext({
-  isRightSidebarVisible: true,
-  setIsRightSidebarVisible: () => {},
-});
-
 const SidebarContext = createContext();
 
 // #TODO: optimize the getItem code
@@ -62,6 +57,7 @@ const SidebarProvider = ({ children }) => {
     isRightSidebarOpen,
     leftToggleSidebar,
     rightToggleSidebar,
+    setRightIsSidebarOpen,
   };
 
   return (
@@ -77,4 +73,4 @@ const useSidebar = () => {
   return context;
 };
 
-export { RightSidebarContext, SidebarProvider, useSidebar };
+export { SidebarProvider, useSidebar };
