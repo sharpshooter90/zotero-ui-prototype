@@ -20,7 +20,7 @@ import { Tooltip } from "react-tippy";
 import { rgba } from "polished";
 import styled, { useTheme } from "styled-components";
 
-import { RightSidebarContext } from "../../context.config";
+import { RightSidebarContext, useSidebar } from "../../context.config";
 import RouterConfig from "../../routes";
 import Collapse from "../Collapse";
 import IconButton from "../IconButton";
@@ -30,7 +30,6 @@ import Main from "../Main";
 import Modal, { ModalContent, ModalHeader } from "../Modal";
 import SearchInput from "../SearchInput";
 import Sidebar from "../Sidebar";
-
 const StyledContainer = styled.div`
   display: flex;
   height: calc(100vh - 67px);
@@ -263,10 +262,15 @@ export default function Container() {
   const href = location.pathname;
 
   const { isRightSidebarVisible } = useContext(RightSidebarContext);
+  const { isLeftSidebarOpen, isRightSidebarOpen } = useSidebar();
 
   return (
     <StyledContainer>
-      <Sidebar width={"280px"} dragHandlePosition="right">
+      <Sidebar
+        width={"280px"}
+        dragHandlePosition="right"
+        isOpen={isLeftSidebarOpen}
+      >
         <List>
           <ListItem>
             <SearchInput
@@ -326,12 +330,18 @@ export default function Container() {
           )}
         </List>
       </Sidebar>
+
       <Main>
         <RouterConfig />
       </Main>
 
       {isRightSidebarVisible && (
-        <Sidebar width={"280px"} dragHandlePosition="left">
+        <Sidebar
+          isOpen={isRightSidebarOpen}
+          width={"280px"}
+          dragHandlePosition="left"
+          position="right"
+        >
           right sidebar
         </Sidebar>
       )}

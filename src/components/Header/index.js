@@ -3,6 +3,10 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import Button from "../Button";
 import CreateNewActionModal from "../CreateNewActionModal";
+import {
+  LeftSidebarToggleButton,
+  RightSidebarToggleButton,
+} from "../Sidebar/SidebarToggleAction";
 
 const StyledHeader = styled.header`
   display: flex;
@@ -12,6 +16,10 @@ const StyledHeader = styled.header`
   padding: 6px 18px;
   gap: 10px;
   height: 46px;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
 
   background-color: ${(props) => props.theme.headerBackgroundColor};
   color: ${(props) => props.theme.headerTextColor};
@@ -34,8 +42,12 @@ export default function Header() {
 
   return (
     <StyledHeader>
-      <StyledLeftCol>Zotero</StyledLeftCol>
+      <StyledLeftCol>
+        Zotero
+        <LeftSidebarToggleButton />
+      </StyledLeftCol>
       <StyledRightCol>
+        <RightSidebarToggleButton />
         <Button
           variant="secondary"
           size="xs"

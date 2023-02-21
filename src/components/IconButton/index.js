@@ -1,6 +1,6 @@
 import Icon from "@mdi/react";
 import React from "react";
-import styled from "styled-components";
+import styled, { useTheme } from "styled-components";
 
 const StyledIconButton = styled.button`
   background-color: transparent;
@@ -17,10 +17,20 @@ const StyledIconButton = styled.button`
   }
 `;
 
-const IconButton = ({ iconPath, onClick, size, iconColor }) => (
-  <StyledIconButton onClick={onClick}>
-    <Icon path={iconPath} size={size} color={iconColor} />
-  </StyledIconButton>
-);
+const IconButton = ({ iconPath, onClick, size, iconColor }) => {
+  const theme = useTheme();
+  return (
+    <StyledIconButton onClick={onClick}>
+      <Icon
+        path={iconPath}
+        size={size}
+        color={iconColor || theme.colors[theme.mode].text}
+      />
+    </StyledIconButton>
+  );
+};
 
+IconButton.defaultProps = {
+  size: 1,
+};
 export default IconButton;

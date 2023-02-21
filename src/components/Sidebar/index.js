@@ -1,9 +1,65 @@
 import { rgba } from "polished";
 import React, { useState } from "react";
 import { DragSizing } from "react-drag-sizing";
-import { useTheme } from "styled-components";
+import styled, { css, keyframes, useTheme } from "styled-components";
 
-const Sidebar = ({ width, dragHandlePosition, children }) => {
+const sidebarSlideIn = keyframes`
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+`;
+
+const StyledSidebar = styled(DragSizing)`
+  position: fixed !important;
+  height: 100vh;
+  top: 59px;
+  transition: all 0.3s ease;
+
+  // Apply the animation to the component using the animation property
+  animation-name: ${({ isSidebarOpen }) => isSidebarOpen && sidebarSlideIn};
+
+  animation-duration: 0.3s;
+  animation-timing-function: ease-in-out;
+
+  ${(props) => {
+    switch (props.position) {
+      case "left":
+        return css`
+          left: ${({ isSidebarOpen }) => (isSidebarOpen ? "0" : "-280px")};
+          transform: translateX(${props.isSidebarOpen ? "0" : "-100%"});
+        `;
+      case "right":
+        return css`
+          right: ${({ isSidebarOpen }) => (isSidebarOpen ? "0" : "-280px")};
+          transform: translateX(${props.isSidebarOpen ? "0" : "100%"});
+        `;
+      // case "top":
+      //   return css`
+      //     top: 0;
+      //     left: 0;
+      //     right: 0;
+      //     height: 200px;
+      //     transform: translateY(${props.isOpen ? "0" : "-100%"});
+      //   `;
+      // case "bottom":
+      //   return css`
+      //     bottom: 0;
+      //     left: 0;
+      //     right: 0;
+      //     height: 200px;
+      //     transform: translateY(${props.isOpen ? "0" : "100%"});
+      //   `;
+      default:
+        return css`
+          left: 0;
+        `;
+    }
+  }}
+`;
+const Sidebar = ({ isOpen, width, dragHandlePosition, children, position }) => {
   const theme = useTheme();
   const [isDragging, setIsDragging] = useState(false);
   const [handlerWidth, setHandlerWidth] = useState(1);
@@ -18,7 +74,7 @@ const Sidebar = ({ width, dragHandlePosition, children }) => {
   };
 
   return (
-    <DragSizing
+    <StyledSidebar
       border={dragHandlePosition}
       width={width}
       onStart={handleEditorSizingStart}
@@ -35,9 +91,11 @@ const Sidebar = ({ width, dragHandlePosition, children }) => {
       }}
       handlerWidth={handlerWidth}
       style={{ minWidth: width }}
+      isSidebarOpen={isOpen}
+      position={position || "left"}
     >
       {children}
-    </DragSizing>
+    </StyledSidebar>
   );
 };
 
