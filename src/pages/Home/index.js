@@ -6,11 +6,11 @@ import {
   mdiPuzzle,
   mdiRssBox,
 } from "@mdi/js";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import ActionCard from "../../components/ActionCard";
 import CreateNewActionModal from "../../components/CreateNewActionModal";
-import { RightSidebarContext } from "../../context.config";
+import { useSidebar } from "../../context.config";
 
 const StyledCardWrapper = styled.div`
   display: flex;
@@ -108,11 +108,10 @@ const categories = {
 };
 
 const Home = () => {
-  const { isRightSidebarVisible, setIsRightSidebarVisible } =
-    useContext(RightSidebarContext);
+  const { rightToggleSidebar } = useSidebar();
 
   useEffect(() => {
-    setIsRightSidebarVisible(false);
+    rightToggleSidebar(false);
   }, []);
   const [isModalOpen, setIsModalOpen] = useState(false);
 

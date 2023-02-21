@@ -2,10 +2,9 @@ import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import "react-tippy/dist/tippy.css";
 import { ThemeProvider } from "styled-components";
-
 import Container from "./components/Container";
 import Header from "./components/Header";
-import { RightSidebarContext } from "./context.config";
+import { SidebarProvider } from "./context.config";
 import theme from "./theme";
 
 function App() {
@@ -22,12 +21,10 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <RightSidebarContext.Provider
-        value={{ isRightSidebarVisible, setIsRightSidebarVisible }}
-      >
+      <SidebarProvider>
         <Header />
         <Container />
-      </RightSidebarContext.Provider>
+      </SidebarProvider>
     </ThemeProvider>
   );
 }
