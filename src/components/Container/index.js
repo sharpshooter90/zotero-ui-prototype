@@ -17,7 +17,6 @@ import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Tooltip } from "react-tippy";
 
-import { rgba } from "polished";
 import styled, { useTheme } from "styled-components";
 
 import { useSidebar } from "../../context.config";
@@ -30,6 +29,7 @@ import Main from "../Main";
 import Modal, { ModalContent, ModalHeader } from "../Modal";
 import SearchInput from "../SearchInput";
 import Sidebar from "../Sidebar";
+import { StyledMutedText } from "../StyledUtils.js";
 import Tag from "../Tag";
 
 const StyledContainer = styled.div`
@@ -42,14 +42,14 @@ const StyledLink = styled(Link)`
   color: ${(props) => props.theme.colors[props.theme.mode].text};
   text-decoration: none;
 `;
-const StyledMutedText = styled.div`
-  color: ${(props) => rgba(props.theme.colors[props.theme.mode].text, 0.5)};
-`;
 
 const StyledTags = styled.div`
   margin-top: 12px;
   display: flex;
   gap: 8px;
+`;
+const StyledTabContent = styled.div`
+  padding: 0 18px;
 `;
 
 const ListMyLibraryOnHoverActionIcons = {
@@ -299,6 +299,14 @@ const mapIconsToActions = (icons) => {
   });
 };
 
+const TabContent = ({ children, active }) => {
+  return (
+    <Collapse isOpen={active}>
+      <StyledTabContent>{children}</StyledTabContent>
+    </Collapse>
+  );
+};
+
 export default function Container() {
   const theme = useTheme();
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -313,7 +321,8 @@ export default function Container() {
 
   const href = location.pathname;
 
-  const { isLeftSidebarOpen, isRightSidebarOpen } = useSidebar();
+  const { isLeftSidebarOpen, isRightSidebarOpen, rightSidebarContent } =
+    useSidebar();
 
   return (
     <StyledContainer>
@@ -392,7 +401,7 @@ export default function Container() {
         dragHandlePosition="left"
         position="right"
       >
-        right sidebar
+        {rightSidebarContent && rightSidebarContent}
       </Sidebar>
 
       {searchModal({ isModalOpen, setIsModalOpen, theme })}

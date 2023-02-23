@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
+import Tabs from "../../components/Tabs";
+import { useSidebar } from "../../context.config";
 
 const StyledContent = styled.div`
   width: 800px;
@@ -14,8 +16,62 @@ const StyledContent = styled.div`
     line-height: 1.4;
   }
 `;
+const StyledTab = styled.div``;
+const StyledTabContent = styled.div`
+  padding: 0 18px;
+`;
+
+const documentMetadata = {
+  info: [
+    {
+      id: "info",
+      tabTitle: "Info",
+      tabContent: "Tab Info Content",
+    },
+  ],
+  notes: [
+    {
+      id: "notes",
+      tabTitle: "Notes",
+      tabContent: "Tab Notes Content",
+    },
+  ],
+  tags: [
+    {
+      id: "tags",
+      tabTitle: "Tags",
+      tabContent: "Tab Tags Content",
+    },
+  ],
+  related: [
+    {
+      id: "related",
+      tabTitle: "Related",
+      tabContent: "Tab Related Content",
+    },
+  ],
+};
+const rightSidebarContent = (data) => {
+  return (
+    <Tabs defaultActiveTab="notes">
+      {Object.entries(data).map(([key, value]) =>
+        value.map((tab, key) => (
+          <StyledTab title={tab.tabTitle} tabid={tab.id} key={key}>
+            <StyledTabContent>{tab.tabContent}</StyledTabContent>
+          </StyledTab>
+        ))
+      )}
+    </Tabs>
+  );
+};
 
 const DiscussingDesignDocument = () => {
+  const { setRightSidebarContent } = useSidebar();
+
+  useEffect(() => {
+    setRightSidebarContent(rightSidebarContent(documentMetadata));
+  }, [setRightSidebarContent]);
+
   return (
     <StyledContent>
       <h2>Discussing Design</h2>
