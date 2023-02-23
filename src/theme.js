@@ -1,6 +1,7 @@
 import { rgba } from "polished";
 
-const backgroundColor = "#151515";
+const darkBackgroundColor = "#151515";
+const lightBackgroundColor = "#333";
 const secondaryBg = "#2B2B2B";
 const brandPrimary = "#FF5858";
 const buttonPrimaryBg = brandPrimary;
@@ -10,10 +11,12 @@ const primaryFontFamily = "Inter, sans-serif";
 const brandBlueShade = "#64D2FF";
 const darkShade = "#272727";
 const lightShade = "#fff";
+const darkTextColor = "#333";
+const lightTextColor = "#fff";
 
 const theme = {
   mode: "dark",
-  backgroundColor: backgroundColor,
+  backgroundColor: darkBackgroundColor,
   textColor: "#fff",
   headerBackgroundColor: "#151515",
   headerTextColor: "#fff",
@@ -40,20 +43,24 @@ const theme = {
       feeds: "#ffed64",
     },
 
-    surface: backgroundColor,
+    surface: darkBackgroundColor,
     // themeing specific colors
     light: {
       background: "#fff",
-      text: "#333",
+      text: darkTextColor,
+      secondaryText: rgba(lightTextColor, 0.5),
       border: borderColor,
       cardBackground: lightShade,
+      mutedText: rgba(darkTextColor, 0.5),
     },
     dark: {
-      background: "#333",
-      text: "#fff",
+      background: lightBackgroundColor,
+      text: lightTextColor,
+      secondaryText: rgba(lightTextColor, 0.5),
       border: borderColor,
       iconColor: rgba(lightShade, 0.8),
       cardBackground: darkShade,
+      mutedText: rgba(darkTextColor, 0.5),
     },
   },
   typography: {

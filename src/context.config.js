@@ -15,6 +15,8 @@ const SidebarProvider = ({ children }) => {
     return initialValue;
   });
 
+  const [rightSidebarContent, setRightSidebarContent] = useState(null);
+
   //  Can make sidebar object in local storage
   useEffect(() => {
     // load the sidebar state from local storage on component mount
@@ -55,9 +57,11 @@ const SidebarProvider = ({ children }) => {
   const value = {
     isLeftSidebarOpen,
     isRightSidebarOpen,
+    rightSidebarContent,
     leftToggleSidebar,
     rightToggleSidebar,
     setRightIsSidebarOpen,
+    setRightSidebarContent,
   };
 
   return (

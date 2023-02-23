@@ -14,31 +14,6 @@ import Button from "../Button";
 import Modal, { ModalContent, ModalHeader } from "../Modal";
 import SearchInput from "../SearchInput";
 
-const StyledHeader = styled.header`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px;
-  gap: 10px;
-  height: 46px;
-
-  background-color: ${(props) => props.theme.headerBackgroundColor};
-  color: ${(props) => props.theme.headerTextColor};
-  border-bottom: 1px solid #343434;
-`;
-
-const StyledLeftCol = styled.div`
-  display: flex;
-  align-items: center;
-`;
-
-const StyledRightCol = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 10px;
-`;
-
 const StyledCardWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
