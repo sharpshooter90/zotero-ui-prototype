@@ -51,6 +51,10 @@ const StyledTags = styled.div`
 const StyledTabContent = styled.div`
   padding: 0 18px;
 `;
+const StyledScollableArea = styled.div`
+  height: 100vh;
+  overflow-y: scroll;
+`;
 
 const ListMyLibraryOnHoverActionIcons = {
   // search: mdiMagnify,
@@ -349,46 +353,48 @@ export default function Container() {
             </ListItem>
           </StyledLink>
         </List>
-        <List>
-          <ListSubheader
-            onHoverActions={mapIconsToActions(myLibraryOnHoverActionIcons)}
-          >
-            My Library
-          </ListSubheader>
-          {mapCollections(
-            sidebarNavItems.collections,
-            openItems,
-            listItemOnClick,
-            theme,
-            href
-          )}
-        </List>
-        <List>
-          <ListSubheader
-            onHoverActions={mapIconsToActions(myLibraryOnHoverActionIcons)}
-          >
-            Group Collections
-          </ListSubheader>
-          {mapCollections(
-            sidebarNavItems.groupCollections,
-            openItems,
-            listItemOnClick,
-            theme
-          )}
-        </List>
-        <List>
-          <ListSubheader
-            onHoverActions={mapIconsToActions(myLibraryOnHoverActionIcons)}
-          >
-            Feeds
-          </ListSubheader>
-          {mapCollections(
-            sidebarNavItems.feeds,
-            openItems,
-            listItemOnClick,
-            theme
-          )}
-        </List>
+        <StyledScollableArea>
+          <List>
+            <ListSubheader
+              onHoverActions={mapIconsToActions(myLibraryOnHoverActionIcons)}
+            >
+              My Library
+            </ListSubheader>
+            {mapCollections(
+              sidebarNavItems.collections,
+              openItems,
+              listItemOnClick,
+              theme,
+              href
+            )}
+          </List>
+          <List>
+            <ListSubheader
+              onHoverActions={mapIconsToActions(myLibraryOnHoverActionIcons)}
+            >
+              Group Collections
+            </ListSubheader>
+            {mapCollections(
+              sidebarNavItems.groupCollections,
+              openItems,
+              listItemOnClick,
+              theme
+            )}
+          </List>
+          <List>
+            <ListSubheader
+              onHoverActions={mapIconsToActions(myLibraryOnHoverActionIcons)}
+            >
+              Feeds
+            </ListSubheader>
+            {mapCollections(
+              sidebarNavItems.feeds,
+              openItems,
+              listItemOnClick,
+              theme
+            )}
+          </List>
+        </StyledScollableArea>
       </Sidebar>
 
       <Main>

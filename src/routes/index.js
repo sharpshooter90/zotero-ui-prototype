@@ -8,7 +8,9 @@ import NotesForDiscussingDesignDocument from "../pages/NotesForDiscussingDesignD
 const RouterConfig = () => {
   return (
     <Routes>
+      <Route index element={<Home />} />
       <Route path="/home" element={<Home />} />
+
       <Route
         path="/book-reviews/discussing-design"
         element={<DiscussingDesignDocument />}
