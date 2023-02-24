@@ -105,7 +105,7 @@ const Home = () => {
 
   useEffect(() => {
     setRightIsSidebarOpen(false);
-  }, [setRightIsSidebarOpen]);
+  }, []);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
