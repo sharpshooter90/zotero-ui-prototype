@@ -303,14 +303,6 @@ const mapIconsToActions = (icons) => {
   });
 };
 
-const TabContent = ({ children, active }) => {
-  return (
-    <Collapse isOpen={active}>
-      <StyledTabContent>{children}</StyledTabContent>
-    </Collapse>
-  );
-};
-
 export default function Container() {
   const theme = useTheme();
   const [isModalOpen, setIsModalOpen] = useState(false);

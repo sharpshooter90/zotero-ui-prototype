@@ -55,7 +55,7 @@ const SidebarProvider = ({ children }) => {
   };
 
   const resetRightSidebarContent = () => {
-    setRightSidebarContent("");
+    setRightSidebarContent(null);
   };
 
   const value = {
