@@ -69,8 +69,11 @@ const DiscussingDesignDocument = () => {
   const { setRightSidebarContent, resetRightSidebarContent } = useSidebar();
 
   useEffect(() => {
-    console.log("Using Effect");
     setRightSidebarContent(rightSidebarContent(documentMetadata));
+
+    return () => {
+      resetRightSidebarContent();
+    };
   }, []);
 
   return (
