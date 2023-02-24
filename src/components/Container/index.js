@@ -82,7 +82,7 @@ const sidebarTypeIcons = {
   feeds: mdiRssBox,
 };
 const sidebarNavItems = {
-  collections: [
+  myLibrary: [
     {
       id: "BookReviews-1",
       name: "Book Reviews",
@@ -208,77 +208,104 @@ const searchModal = ({ isModalOpen, setIsModalOpen, theme }) => {
     </Modal>
   ) : null;
 };
+const isListIndexActive = (activeUrl, currentUrl) => {
+  return currentUrl === activeUrl ? true : false;
+};
 
-const mapCollections = (
-  collections,
+const camelCaseToString = (camelCase) => {
+  const string = camelCase.replace(/([A-Z])/g, " $1");
+  return string.charAt(0).toUpperCase() + string.slice(1);
+};
+
+const renderTreeView = (
+  sidebarNavItems,
   openItems,
-  listItemOnClick,
   theme,
-  href
+  listItemOnClick,
+  currentUrl,
+  activeListIndex
 ) => {
-  return Object.values(collections).map((collection, index) => {
-    const isOpen = !!openItems[collection.id];
-    return (
-      <React.Fragment key={index}>
-        <ListItem
-          leftIcon={
-            isOpen
-              ? sidebarTypeIcons[collection.type]
-              : sidebarTypeIcons[collection.type]
-          }
-          leftIconColor={theme.colors.collectionTypeColors[collection.type]}
-          onHoverActions={mapIconsToActions(ListMyLibraryOnHoverActionIcons)}
-          onClick={() => listItemOnClick(collection)}
-          iconSize={0.8}
-          key={collection.id}
-          itemId={collection.id}
+  {
+    return Object.keys(sidebarNavItems).map((key, index) => (
+      <React.Fragment key={index + "_category"}>
+        <ListSubheader
+          onHoverActions={mapIconsToActions(myLibraryOnHoverActionIcons)}
         >
-          {collection.name}
-        </ListItem>
-        {collection.subcollections.length > 0 ? (
-          collection.subcollections.map((subCollection) => {
-            return (
-              <Collapse
-                isOpen={isOpen}
-                key={subCollection.id + "wrapper"}
-                as="li"
+          {camelCaseToString(key)}
+        </ListSubheader>
+        {sidebarNavItems[key].map((item, ItemIndex) => {
+          const isOpen = !!openItems[item.id] || activeListIndex === item.url;
+          return (
+            <React.Fragment key={ItemIndex + "_menuItem"}>
+              <ListItem
+                leftIcon={
+                  isOpen
+                    ? sidebarTypeIcons[item.type]
+                    : sidebarTypeIcons[item.type]
+                }
+                leftIconColor={theme.colors.collectionTypeColors[item.type]}
+                onHoverActions={mapIconsToActions(
+                  ListMyLibraryOnHoverActionIcons
+                )}
+                onClick={() => listItemOnClick(item)}
+                iconSize={0.8}
+                key={item.id}
+                itemId={item.id}
               >
-                <StyledLink to={subCollection.url}>
+                {item.name}
+              </ListItem>
+              {item.subcollections.length > 0 ? (
+                <Collapse
+                  key={item.subcollections.id + "wrapper"}
+                  as="li"
+                  isOpen={isOpen}
+                >
+                  {item.subcollections.map((subitem, subItemIndex) => (
+                    <StyledLink
+                      to={subitem.url}
+                      key={subItemIndex + "_subMenuItem"}
+                    >
+                      <ListItem
+                        key={subitem.id}
+                        leftIcon={collectionTypeIcons[subitem.type]}
+                        onHoverActions={mapIconsToActions(
+                          ListMyLibraryOnHoverActionIcons
+                        )}
+                        iconSize={0.8}
+                        sx={{ paddingLeft: "32px" }}
+                        itemId={subitem.id}
+                        isActive={isListIndexActive(subitem.url, currentUrl)}
+                        as="div"
+                      >
+                        {subitem.name}
+                      </ListItem>
+                    </StyledLink>
+                  ))}
+                </Collapse>
+              ) : (
+                <Collapse
+                  isOpen={isOpen}
+                  key={item.subcollections.id + "_noSubItems"}
+                  as="li"
+                >
                   <ListItem
-                    key={subCollection.id}
-                    leftIcon={collectionTypeIcons[subCollection.type]}
                     onHoverActions={mapIconsToActions(
                       ListMyLibraryOnHoverActionIcons
                     )}
                     iconSize={0.8}
                     sx={{ paddingLeft: "32px" }}
-                    itemId={subCollection.id}
-                    isActive={href === subCollection.url ? true : false}
                     as="div"
                   >
-                    {subCollection.name}
+                    <StyledMutedText>Empty</StyledMutedText>
                   </ListItem>
-                </StyledLink>
-              </Collapse>
-            );
-          })
-        ) : (
-          <Collapse isOpen={isOpen} key={collection.id + "_noSubItems"} as="li">
-            <ListItem
-              onHoverActions={mapIconsToActions(
-                ListMyLibraryOnHoverActionIcons
+                </Collapse>
               )}
-              iconSize={0.8}
-              sx={{ paddingLeft: "32px" }}
-              as="div"
-            >
-              <StyledMutedText>Empty</StyledMutedText>
-            </ListItem>
-          </Collapse>
-        )}
+            </React.Fragment>
+          );
+        })}
       </React.Fragment>
-    );
-  });
+    ));
+  }
 };
 
 const mapIconsToActions = (icons) => {
@@ -303,6 +330,11 @@ const mapIconsToActions = (icons) => {
   });
 };
 
+const clearCurrentURL = (pathname) => {
+  const parentURL = pathname.split("/"); // split the path into an array of parts
+  return "/" + parentURL[1]; // return the path
+};
+
 export default function Container() {
   const theme = useTheme();
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -313,12 +345,17 @@ export default function Container() {
       [collection.id]: !openItems[collection.id],
     });
   };
+
   const location = useLocation();
 
-  const href = location.pathname;
+  const currentUrl = location.pathname;
 
   const { isLeftSidebarOpen, isRightSidebarOpen, rightSidebarContent } =
     useSidebar();
+
+  const [activeListIndex, setActiveListIndex] = useState(
+    clearCurrentURL(currentUrl)
+  );
 
   return (
     <StyledContainer>
@@ -339,53 +376,21 @@ export default function Container() {
             <ListItem
               leftIcon={mdiHome}
               iconSize={0.8}
-              isActive={href === "/home" ? true : false}
+              isActive={currentUrl === "/home" ? true : false}
             >
               Home
             </ListItem>
           </StyledLink>
         </List>
         <StyledScollableArea>
-          <List>
-            <ListSubheader
-              onHoverActions={mapIconsToActions(myLibraryOnHoverActionIcons)}
-            >
-              My Library
-            </ListSubheader>
-            {mapCollections(
-              sidebarNavItems.collections,
-              openItems,
-              listItemOnClick,
-              theme,
-              href
-            )}
-          </List>
-          <List>
-            <ListSubheader
-              onHoverActions={mapIconsToActions(myLibraryOnHoverActionIcons)}
-            >
-              Group Collections
-            </ListSubheader>
-            {mapCollections(
-              sidebarNavItems.groupCollections,
-              openItems,
-              listItemOnClick,
-              theme
-            )}
-          </List>
-          <List>
-            <ListSubheader
-              onHoverActions={mapIconsToActions(myLibraryOnHoverActionIcons)}
-            >
-              Feeds
-            </ListSubheader>
-            {mapCollections(
-              sidebarNavItems.feeds,
-              openItems,
-              listItemOnClick,
-              theme
-            )}
-          </List>
+          {renderTreeView(
+            sidebarNavItems,
+            openItems,
+            theme,
+            listItemOnClick,
+            currentUrl,
+            activeListIndex
+          )}
         </StyledScollableArea>
       </Sidebar>
 
