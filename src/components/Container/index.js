@@ -222,8 +222,7 @@ const renderTreeView = (
   openItems,
   theme,
   listItemOnClick,
-  currentUrl,
-  activeListIndex
+  currentUrl
 ) => {
   {
     return Object.keys(sidebarNavItems).map((key, index) => (
@@ -234,7 +233,7 @@ const renderTreeView = (
           {camelCaseToString(key)}
         </ListSubheader>
         {sidebarNavItems[key].map((item, ItemIndex) => {
-          const isOpen = !!openItems[item.id] || activeListIndex === item.url;
+          const isOpen = !!openItems[item.id];
           return (
             <React.Fragment key={ItemIndex + "_menuItem"}>
               <ListItem
@@ -338,13 +337,6 @@ const clearCurrentURL = (pathname) => {
 export default function Container() {
   const theme = useTheme();
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [openItems, setOpenItems] = useState({});
-  const listItemOnClick = (collection) => {
-    setOpenItems({
-      ...openItems,
-      [collection.id]: !openItems[collection.id],
-    });
-  };
 
   const location = useLocation();
 
@@ -353,9 +345,24 @@ export default function Container() {
   const { isLeftSidebarOpen, isRightSidebarOpen, rightSidebarContent } =
     useSidebar();
 
-  const [activeListIndex, setActiveListIndex] = useState(
-    clearCurrentURL(currentUrl)
-  );
+  // set default current path matched directory opened by default on load
+  const defaultOpenItems = Object.values(sidebarNavItems).reduce((acc, cur) => {
+    const items = Array.isArray(cur) ? cur : [cur];
+    for (const item of items) {
+      if (item.subcollections.some((subitem) => subitem.url === currentUrl)) {
+        acc[item.id] = true;
+        break;
+      }
+    }
+    return acc;
+  }, {});
+  console.log(defaultOpenItems);
+
+  const [openItems, setOpenItems] = useState(defaultOpenItems);
+
+  const listItemOnClick = (collection) => {
+    setOpenItems({ ...openItems, [collection.id]: !openItems[collection.id] });
+  };
 
   return (
     <StyledContainer>
@@ -388,8 +395,7 @@ export default function Container() {
             openItems,
             theme,
             listItemOnClick,
-            currentUrl,
-            activeListIndex
+            currentUrl
           )}
         </StyledScollableArea>
       </Sidebar>
