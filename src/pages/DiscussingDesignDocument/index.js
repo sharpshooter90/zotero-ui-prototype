@@ -66,9 +66,16 @@ const rightSidebarContent = (data) => {
 };
 
 const DiscussingDesignDocument = () => {
-  const { setRightSidebarContent, resetRightSidebarContent } = useSidebar();
+  const {
+    setRightSidebarContent,
+    resetRightSidebarContent,
+    setRightIsSidebarOpen,
+  } = useSidebar();
 
   useEffect(() => {
+    // enabling the right sidebar view
+    setRightIsSidebarOpen(true);
+    // passing the content to right sidebar context
     setRightSidebarContent(rightSidebarContent(documentMetadata));
 
     return () => {
