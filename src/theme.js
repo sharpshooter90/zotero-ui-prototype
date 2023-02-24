@@ -1,4 +1,4 @@
-import { rgba } from "polished";
+import { lighten, rgba } from "polished";
 
 const darkBackgroundColor = "#151515";
 const lightBackgroundColor = "#333";
@@ -60,7 +60,7 @@ const theme = {
       border: borderColor,
       iconColor: rgba(lightShade, 0.8),
       cardBackground: darkShade,
-      mutedText: rgba(darkTextColor, 0.5),
+      mutedText: lighten(0.4, darkTextColor),
     },
   },
   typography: {

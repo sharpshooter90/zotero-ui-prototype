@@ -16,10 +16,6 @@ const StyledHeader = styled.header`
   padding: 6px 18px;
   gap: 10px;
   height: 46px;
-  position: fixed;
-  top: 0;
-  right: 0;
-  left: 0;
 
   background-color: ${(props) => props.theme.headerBackgroundColor};
   color: ${(props) => props.theme.headerTextColor};

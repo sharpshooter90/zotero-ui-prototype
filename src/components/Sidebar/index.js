@@ -13,9 +13,6 @@ const sidebarSlideIn = keyframes`
 `;
 
 const StyledSidebar = styled(DragSizing)`
-  position: fixed !important;
-  height: 100vh;
-  top: 59px;
   transition: all 0.3s ease;
 
   // Apply the animation to the component using the animation property

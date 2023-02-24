@@ -66,11 +66,12 @@ const rightSidebarContent = (data) => {
 };
 
 const DiscussingDesignDocument = () => {
-  const { setRightSidebarContent } = useSidebar();
+  const { setRightSidebarContent, resetRightSidebarContent } = useSidebar();
 
   useEffect(() => {
+    console.log("Using Effect");
     setRightSidebarContent(rightSidebarContent(documentMetadata));
-  }, [setRightSidebarContent]);
+  }, []);
 
   return (
     <StyledContent>
@@ -107,6 +108,30 @@ const DiscussingDesignDocument = () => {
           situations
         </li>
       </ul>
+      <p>
+        "Discussing Design: Improving Communication and Collaboration Through
+        Critique" by Aaron Irizarry and Adam Connor offers a comprehensive guide
+        to improving collaboration in design teams through critique. The book
+        covers the fundamentals of design critique and criticism, providing
+        effective strategies such as how to set the stage for productive
+        conversations and how to provide constructive feedback. It also includes
+        advice on how to receive feedback, establish trust between team members,
+        and manage difficult conversations. By following the strategies outlined
+        in this book, design teams can foster a culture of collaboration and
+        communication that leads to better results. #111
+      </p>
+      <p>
+        "Discussing Design: Improving Communication and Collaboration Through
+        Critique" by Aaron Irizarry and Adam Connor offers a comprehensive guide
+        to improving collaboration in design teams through critique. The book
+        covers the fundamentals of design critique and criticism, providing
+        effective strategies such as how to set the stage for productive
+        conversations and how to provide constructive feedback. It also includes
+        advice on how to receive feedback, establish trust between team members,
+        and manage difficult conversations. By following the strategies outlined
+        in this book, design teams can foster a culture of collaboration and
+        communication that leads to better results. #111
+      </p>
       <p>
         "Discussing Design: Improving Communication and Collaboration Through
         Critique" by Aaron Irizarry and Adam Connor offers a comprehensive guide

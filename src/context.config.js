@@ -54,6 +54,10 @@ const SidebarProvider = ({ children }) => {
     setRightIsSidebarOpen(!isRightSidebarOpen);
   };
 
+  const resetRightSidebarContent = () => {
+    setRightSidebarContent("");
+  };
+
   const value = {
     isLeftSidebarOpen,
     isRightSidebarOpen,
@@ -62,6 +66,7 @@ const SidebarProvider = ({ children }) => {
     rightToggleSidebar,
     setRightIsSidebarOpen,
     setRightSidebarContent,
+    resetRightSidebarContent, // Define a function to reset the value to default
   };
 
   return (
