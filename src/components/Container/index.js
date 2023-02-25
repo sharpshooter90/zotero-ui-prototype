@@ -48,10 +48,8 @@ const StyledTags = styled.div`
   display: flex;
   gap: 8px;
 `;
-const StyledTabContent = styled.div`
-  padding: 0 18px;
-`;
-const StyledScollableArea = styled.div`
+
+const StyledScrollableArea = styled.div`
   height: 100vh;
   overflow-y: scroll;
 `;
@@ -88,7 +86,7 @@ const sidebarNavItems = {
       name: "Book Reviews",
       url: "/book-reviews",
       type: "collections",
-      subcollections: [
+      subCollections: [
         {
           id: "BookReviews-DiscussingDesign-2",
           name: "Discussing Design",
@@ -108,14 +106,14 @@ const sidebarNavItems = {
       name: "Colonial Medicine",
       url: "/colonial-medicine",
       type: "collections",
-      subcollections: [],
+      subCollections: [],
     },
     {
       id: "Dissertation-5",
       name: "Dissertation",
       url: "/dissertation",
       type: "collections",
-      subcollections: [],
+      subCollections: [],
     },
   ],
   groupCollections: [
@@ -124,14 +122,14 @@ const sidebarNavItems = {
       name: "Design Group",
       url: "/design-group",
       type: "groupCollections",
-      subcollections: [],
+      subCollections: [],
     },
     {
       id: "research-group-1",
       name: "Research Group",
       url: "/research-group",
       type: "groupCollections",
-      subcollections: [],
+      subCollections: [],
     },
   ],
   feeds: [
@@ -140,14 +138,14 @@ const sidebarNavItems = {
       name: "Tech Feed",
       url: "/tech-feed",
       type: "feeds",
-      subcollections: [],
+      subCollections: [],
     },
     {
       id: "aquatic-feed-1",
       name: "Aquatic Feed",
       url: "/aquatic-feed",
       type: "feeds",
-      subcollections: [],
+      subCollections: [],
     },
   ],
 };
@@ -178,7 +176,7 @@ const tagsData = [
   },
 ];
 
-const searchModal = ({ isModalOpen, setIsModalOpen, theme }) => {
+const searchModal = ({ isModalOpen, setIsModalOpen }) => {
   return isModalOpen ? (
     <Modal
       isOpen={isModalOpen}
@@ -209,7 +207,7 @@ const searchModal = ({ isModalOpen, setIsModalOpen, theme }) => {
   ) : null;
 };
 const isListIndexActive = (activeUrl, currentUrl) => {
-  return currentUrl === activeUrl ? true : false;
+  return currentUrl === activeUrl;
 };
 
 const camelCaseToString = (camelCase) => {
@@ -224,91 +222,89 @@ const renderTreeView = (
   listItemOnClick,
   currentUrl
 ) => {
-  {
-    return Object.keys(sidebarNavItems).map((key, index) => (
-      <React.Fragment key={index + "_category"}>
-        <ListSubheader
-          onHoverActions={mapIconsToActions(myLibraryOnHoverActionIcons)}
-        >
-          {camelCaseToString(key)}
-        </ListSubheader>
-        {sidebarNavItems[key].map((item, ItemIndex) => {
-          const isOpen = !!openItems[item.id];
-          return (
-            <React.Fragment key={ItemIndex + "_menuItem"}>
-              <ListItem
-                leftIcon={
-                  isOpen
-                    ? sidebarTypeIcons[item.type]
-                    : sidebarTypeIcons[item.type]
-                }
-                leftIconColor={theme.colors.collectionTypeColors[item.type]}
-                onHoverActions={mapIconsToActions(
-                  ListMyLibraryOnHoverActionIcons
-                )}
-                onClick={() => listItemOnClick(item)}
-                iconSize={0.8}
-                key={item.id}
-                itemId={item.id}
-              >
-                {item.name}
-              </ListItem>
-              {item.subcollections.length > 0 ? (
-                <Collapse
-                  key={item.subcollections.id + "wrapper"}
-                  as="li"
-                  isOpen={isOpen}
-                >
-                  {item.subcollections.map((subitem, subItemIndex) => (
-                    <StyledLink
-                      to={subitem.url}
-                      key={subItemIndex + "_subMenuItem"}
-                    >
-                      <ListItem
-                        key={subitem.id}
-                        leftIcon={collectionTypeIcons[subitem.type]}
-                        onHoverActions={mapIconsToActions(
-                          ListMyLibraryOnHoverActionIcons
-                        )}
-                        iconSize={0.8}
-                        sx={{ paddingLeft: "32px" }}
-                        itemId={subitem.id}
-                        isActive={isListIndexActive(subitem.url, currentUrl)}
-                        as="div"
-                      >
-                        {subitem.name}
-                      </ListItem>
-                    </StyledLink>
-                  ))}
-                </Collapse>
-              ) : (
-                <Collapse
-                  isOpen={isOpen}
-                  key={item.subcollections.id + "_noSubItems"}
-                  as="li"
-                >
-                  <ListItem
-                    onHoverActions={mapIconsToActions(
-                      ListMyLibraryOnHoverActionIcons
-                    )}
-                    iconSize={0.8}
-                    sx={{ paddingLeft: "32px" }}
-                    as="div"
-                  >
-                    <StyledMutedText>Empty</StyledMutedText>
-                  </ListItem>
-                </Collapse>
+  return Object.keys(sidebarNavItems).map((key, index) => (
+    <React.Fragment key={index + "_category"}>
+      <ListSubheader
+        onHoverActions={mapIconsToActions(myLibraryOnHoverActionIcons)}
+      >
+        {camelCaseToString(key)}
+      </ListSubheader>
+      {sidebarNavItems[key].map((item, ItemIndex) => {
+        const isOpen = !!openItems[item.id];
+        return (
+          <React.Fragment key={ItemIndex + "_menuItem"}>
+            <ListItem
+              leftIcon={
+                isOpen
+                  ? sidebarTypeIcons[item.type]
+                  : sidebarTypeIcons[item.type]
+              }
+              leftIconColor={theme.colors.collectionTypeColors[item.type]}
+              onHoverActions={mapIconsToActions(
+                ListMyLibraryOnHoverActionIcons
               )}
-            </React.Fragment>
-          );
-        })}
-      </React.Fragment>
-    ));
-  }
+              onClick={() => listItemOnClick(item)}
+              iconSize={0.8}
+              key={item.id}
+              itemId={item.id}
+            >
+              {item.name}
+            </ListItem>
+            {item.subCollections.length > 0 ? (
+              <Collapse
+                key={item.subCollections.id + "wrapper"}
+                as="li"
+                isOpen={isOpen}
+              >
+                {item.subCollections.map((subItem, subItemIndex) => (
+                  <StyledLink
+                    to={subItem.url}
+                    key={subItemIndex + "_subMenuItem"}
+                  >
+                    <ListItem
+                      key={subItem.id}
+                      leftIcon={collectionTypeIcons[subItem.type]}
+                      onHoverActions={mapIconsToActions(
+                        ListMyLibraryOnHoverActionIcons
+                      )}
+                      iconSize={0.8}
+                      sx={{ paddingLeft: "32px" }}
+                      itemId={subItem.id}
+                      isActive={isListIndexActive(subItem.url, currentUrl)}
+                      as="div"
+                    >
+                      {subItem.name}
+                    </ListItem>
+                  </StyledLink>
+                ))}
+              </Collapse>
+            ) : (
+              <Collapse
+                isOpen={isOpen}
+                key={item.subCollections.id + "_noSubItems"}
+                as="li"
+              >
+                <ListItem
+                  onHoverActions={mapIconsToActions(
+                    ListMyLibraryOnHoverActionIcons
+                  )}
+                  iconSize={0.8}
+                  sx={{ paddingLeft: "32px" }}
+                  as="div"
+                >
+                  <StyledMutedText>Empty</StyledMutedText>
+                </ListItem>
+              </Collapse>
+            )}
+          </React.Fragment>
+        );
+      })}
+    </React.Fragment>
+  ));
 };
 
 const mapIconsToActions = (icons) => {
-  return Object.entries(icons).map(([key, value, index]) => {
+  return Object.entries(icons).map(([key, iconPath], index) => {
     return (
       <Tooltip
         title={key.replace(/([a-z0-9])([A-Z])/g, "$1 $2")}
@@ -319,7 +315,7 @@ const mapIconsToActions = (icons) => {
         key={index}
       >
         <IconButton
-          iconPath={value}
+          iconPath={iconPath}
           key={index}
           size={0.7}
           onClick={() => console.log("action: " + key)}
@@ -328,12 +324,6 @@ const mapIconsToActions = (icons) => {
     );
   });
 };
-
-const clearCurrentURL = (pathname) => {
-  const parentURL = pathname.split("/"); // split the path into an array of parts
-  return "/" + parentURL[1]; // return the path
-};
-
 export default function Container() {
   const theme = useTheme();
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -349,7 +339,7 @@ export default function Container() {
   const defaultOpenItems = Object.values(sidebarNavItems).reduce((acc, cur) => {
     const items = Array.isArray(cur) ? cur : [cur];
     for (const item of items) {
-      if (item.subcollections.some((subitem) => subitem.url === currentUrl)) {
+      if (item.subCollections.some((subItem) => subItem.url === currentUrl)) {
         acc[item.id] = true;
         break;
       }
@@ -383,13 +373,13 @@ export default function Container() {
             <ListItem
               leftIcon={mdiHome}
               iconSize={0.8}
-              isActive={currentUrl === "/home" ? true : false}
+              isActive={currentUrl === "/home"}
             >
               Home
             </ListItem>
           </StyledLink>
         </List>
-        <StyledScollableArea>
+        <StyledScrollableArea>
           {renderTreeView(
             sidebarNavItems,
             openItems,
@@ -397,7 +387,7 @@ export default function Container() {
             listItemOnClick,
             currentUrl
           )}
-        </StyledScollableArea>
+        </StyledScrollableArea>
       </Sidebar>
 
       <Main>
@@ -413,7 +403,7 @@ export default function Container() {
         {rightSidebarContent && rightSidebarContent}
       </Sidebar>
 
-      {searchModal({ isModalOpen, setIsModalOpen, theme })}
+      {searchModal({ isModalOpen, setIsModalOpen })}
     </StyledContainer>
   );
 }
