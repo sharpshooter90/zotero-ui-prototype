@@ -15,7 +15,7 @@ const ListItemStyled = styled.li`
       background-color: ${(props) =>
         props.isActive ? props.theme.ListItem.backgroundHover : "transparent"};
     `};
-
+  color: ${(props) => props.theme.ListItem.textColor};
   padding: 8px 18px;
   font-size: ${(props) => props.theme.typography.fontSizes.sm};
   display: flex;
@@ -24,7 +24,7 @@ const ListItemStyled = styled.li`
   cursor: pointer;
   gap: 8px;
   &:hover {
-    background-color: ${({ theme }) => theme.ListItem.background};
+    background-color: ${({ theme }) => theme.ListItem.backgroundColor};
   }
 `;
 

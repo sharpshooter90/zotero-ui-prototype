@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import ReactDOM from "react-dom";
 import styled, { useTheme } from "styled-components";
+import { rgba, darken } from "polished";
 import IconButton from "../IconButton";
 
 const ModalOverlay = styled.div`
@@ -9,7 +10,7 @@ const ModalOverlay = styled.div`
   bottom: 0;
   left: 0;
   right: 0;
-  background-color: rgba(0, 0, 0, 0.75);
+  background-color: ${(props) => rgba(props.theme.backgroundColor, 0.75)};
   display: flex;
   align-items: center;
   justify-content: center;
@@ -21,7 +22,7 @@ const StyledModalContainer = styled.div``;
 const CloseButton = styled.div`
   background-color: transparent;
   border: 0;
-  color: white;
+  color: ${(props) => props.theme.text};
   cursor: pointer;
   position: absolute;
   top: 8px;
@@ -29,7 +30,7 @@ const CloseButton = styled.div`
 `;
 
 const StyledModalHeader = styled.div`
-  background: #1f1e1e;
+  background: ${(props) => rgba(props.theme.backgroundColor, 0.4)};
   padding: 24px;
   border-top-left-radius: 12px;
   border-top-right-radius: 12px;
@@ -62,9 +63,9 @@ const StyledModalBody = styled.div`
   max-height: 80%;
   max-width: 800px;
   width: 800px;
-  background: #151515;
+  background: ${(props) => darken(0.4, props.theme.backgroundColor)};
   border-radius: 12px;
-  color: #fff;
+  color: ${(props) => props.theme.text};
   position: relative;
   z-index: ${(props) => props.theme.zIndex.modal};
 `;
@@ -112,7 +113,7 @@ const Modal = ({ isOpen, children, onClose, closeIcon }) => {
                 onClick={onClose}
                 iconPath={closeIcon}
                 size={1}
-                iconColor={theme.colors[theme.mode].iconColor}
+                iconColor={theme.colors.iconColor}
               ></IconButton>
             </CloseButton>
           </StyledModalBody>

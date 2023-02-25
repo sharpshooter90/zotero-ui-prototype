@@ -21,11 +21,7 @@ const IconButton = ({ iconPath, onClick, size, iconColor }) => {
   const theme = useTheme();
   return (
     <StyledIconButton onClick={onClick}>
-      <Icon
-        path={iconPath}
-        size={size}
-        color={iconColor || theme.colors[theme.mode].text}
-      />
+      <Icon path={iconPath} size={size} color={iconColor || theme.text} />
     </StyledIconButton>
   );
 };

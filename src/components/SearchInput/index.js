@@ -26,7 +26,7 @@ const SearchInputContainer = styled.div`
         ${(props) =>
           props.theme.searchInput.variants[props.variant].borderColor};
     `};
-  box-shadow: ${({ theme }) => theme.shadow.searchInput};
+  box-shadow: ${({ theme }) => theme.searchInput.shadow};
   gap: 4px;
   &:hover {
     background-color: ${({ theme }) => theme.searchInput.inputHoverBg};

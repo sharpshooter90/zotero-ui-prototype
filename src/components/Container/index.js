@@ -39,7 +39,7 @@ const StyledContainer = styled.div`
   color: ${(props) => props.theme.textColor};
 `;
 const StyledLink = styled(Link)`
-  color: ${(props) => props.theme.colors[props.theme.mode].text};
+  color: ${(props) => props.theme.colors.text};
   text-decoration: none;
 `;
 
@@ -346,7 +346,6 @@ export default function Container() {
     }
     return acc;
   }, {});
-  console.log(defaultOpenItems);
 
   const [openItems, setOpenItems] = useState(defaultOpenItems);
 

@@ -25,7 +25,7 @@ const TagWrapper = styled.div`
   font-size: ${(props) => sizes[props.size].fontSize};
   padding: ${(props) => sizes[props.size].padding};
   border-radius: 24px;
-  border: 1px solid ${(props) => props.theme.colors[props.theme.mode].border};
+  border: 1px solid ${(props) => props.theme.colors.border};
   cursor: pointer;
 
   &:hover {
@@ -36,8 +36,8 @@ const TagWrapper = styled.div`
     props.active &&
     `
     background-color: ${props.theme.colors.gray};
-    color: ${props.theme.colors[props.theme.mode].text};
-    border-color: ${props.theme.colors[props.theme.mode].border};
+    color: ${props.theme.colors.text};
+    border-color: ${props.theme.colors.border};
   `}
 `;
 
