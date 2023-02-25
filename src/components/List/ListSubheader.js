@@ -42,8 +42,6 @@ const SubheaderContainer = styled.div`
 
   letter-spacing: -0.02em;
 
-  color: rgba(255, 255, 255, 0.62);
-
   &:hover {
     background-color: ${({ theme }) => theme.ListItem.background};
   }

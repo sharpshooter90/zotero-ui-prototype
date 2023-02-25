@@ -1,5 +1,5 @@
 import { mdiCloudSync, mdiPlus } from "@mdi/js";
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import styled from "styled-components";
 import Button from "../Button";
 import CreateNewActionModal from "../CreateNewActionModal";
@@ -7,6 +7,7 @@ import {
   LeftSidebarToggleButton,
   RightSidebarToggleButton,
 } from "../Sidebar/SidebarToggleAction";
+import { ZoteroThemeContext } from "../../context.config";
 
 const StyledHeader = styled.header`
   display: flex;
@@ -17,9 +18,9 @@ const StyledHeader = styled.header`
   gap: 10px;
   height: 46px;
 
-  background-color: ${(props) => props.theme.headerBackgroundColor};
+  background-color: ${(props) => props.theme.header.backgroundColor};
   color: ${(props) => props.theme.headerTextColor};
-  border-bottom: 1px solid #343434;
+  border-bottom: 1px solid ${(props) => props.theme.border};
 `;
 
 const StyledLeftCol = styled.div`
@@ -35,6 +36,8 @@ const StyledRightCol = styled.div`
 
 export default function Header() {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  // Get the theme object and toggle function from the context
+  const { handleToggleMode } = useContext(ZoteroThemeContext);
 
   return (
     <StyledHeader>
@@ -43,6 +46,7 @@ export default function Header() {
         <LeftSidebarToggleButton />
       </StyledLeftCol>
       <StyledRightCol>
+        <button onClick={handleToggleMode}>Toggle Theme</button>
         <RightSidebarToggleButton />
         <Button
           variant="secondary"

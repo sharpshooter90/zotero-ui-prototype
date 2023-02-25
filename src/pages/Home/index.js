@@ -21,10 +21,10 @@ const StyledSectionTitle = styled.h2`
   font-weight: 600;
   letter-spacing: -0.8px;
   text-transform: capitalize;
-  color: ${(props) => props.theme.colors[props.theme.mode].text};
+  color: ${(props) => props.theme.text};
 `;
 const StyledSection = styled.div`
-  margin-bottom: 32px; ;
+  margin-bottom: 32px;
 `;
 
 const categoriesIcons = {

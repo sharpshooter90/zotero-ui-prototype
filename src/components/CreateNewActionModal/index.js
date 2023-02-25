@@ -111,9 +111,7 @@ const CreateNewActionModal = ({ isModalOpen, setIsModalOpen }) => {
       closeIcon={mdiClose}
     >
       <ModalHeader>
-        <StyledHeading color={theme.colors[theme.mode].text}>
-          Search by metadata
-        </StyledHeading>
+        <StyledHeading color={theme.text}>Search by metadata</StyledHeading>
         <div>
           <SearchInput
             placeholder="ISBNs, DOIs, PMIDs, arXiv IDs, ADS Bibcodes"
@@ -124,7 +122,7 @@ const CreateNewActionModal = ({ isModalOpen, setIsModalOpen }) => {
       </ModalHeader>
       <ModalContent>
         <StyledSectionHeader>
-          <StyledHeading color={theme.colors[theme.mode].text}>
+          <StyledHeading color={theme.text}>
             Add new from a template
           </StyledHeading>
           <SearchInput placeholder="Search in templates" variant="default" />

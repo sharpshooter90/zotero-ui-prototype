@@ -17,10 +17,10 @@ const StyledCardContainer = styled.div`
   padding: 16px 24px;
   border-radius: 0.5rem;
   box-shadow: 0 0.1rem 0.5rem rgba(0, 0, 0, 0.1);
-  background-color: ${(props) => props.theme.card.background};
+  background-color: ${(props) => props.theme.cardBackground};
   transition: all 0.2s ease-in-out;
   min-height: 120px;
-
+  color: ${(props) => props.theme.card.textColor};
   /* &:nth-last-of-type(-n + 2) {
     flex: 0;
     min-width: 195px;
@@ -36,7 +36,7 @@ const StyledCardTitle = styled.div`
 `;
 
 const StyledLink = styled(Link)`
-  color: ${(props) => props.theme.colors[props.theme.mode].text};
+  color: ${(props) => props.theme.card.textColor};
   text-decoration: none;
   height: 100%;
   display: flex;

@@ -58,6 +58,7 @@ const StyledSidebar = styled(DragSizing)`
 `;
 const Sidebar = ({ isOpen, width, dragHandlePosition, children, position }) => {
   const theme = useTheme();
+
   const [isDragging, setIsDragging] = useState(false);
   const [handlerWidth, setHandlerWidth] = useState(1);
   const handleEditorSizingStart = () => {
@@ -78,11 +79,11 @@ const Sidebar = ({ isOpen, width, dragHandlePosition, children, position }) => {
       onEnd={handleEditorSizingEnd}
       handlerStyle={{
         backgroundColor: isDragging
-          ? theme.colors.primaryBg
-          : theme.colors[theme.mode].border,
+          ? theme.dragHandle.backgroundColor
+          : theme.border,
         border:
           "3px solid" + isDragging
-            ? rgba(theme.colors.primaryBg, 0.5)
+            ? rgba(theme.dragHandle.backgroundColor, 0.5)
             : "initial",
         transition: "background-color ease-in 0.2s",
       }}
