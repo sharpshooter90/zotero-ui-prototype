@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import ReactDOM from "react-dom";
 import styled, { useTheme } from "styled-components";
-import { rgba, darken } from "polished";
+import { rgba, darken, lighten } from "polished";
 import IconButton from "../IconButton";
 
 const ModalOverlay = styled.div`
@@ -10,7 +10,8 @@ const ModalOverlay = styled.div`
   bottom: 0;
   left: 0;
   right: 0;
-  background-color: ${(props) => rgba(props.theme.backgroundColor, 0.75)};
+  background-color: ${(props) =>
+    rgba(props.theme.modal.overlayBackground, 0.75)};
   display: flex;
   align-items: center;
   justify-content: center;
@@ -30,7 +31,7 @@ const CloseButton = styled.div`
 `;
 
 const StyledModalHeader = styled.div`
-  background: ${(props) => rgba(props.theme.backgroundColor, 0.4)};
+  background: ${(props) => lighten(0.1, props.theme.modal.backgroundColor)};
   padding: 24px;
   border-top-left-radius: 12px;
   border-top-right-radius: 12px;
@@ -63,7 +64,7 @@ const StyledModalBody = styled.div`
   max-height: 80%;
   max-width: 800px;
   width: 800px;
-  background: ${(props) => darken(0.4, props.theme.backgroundColor)};
+  background: ${(props) => props.theme.modal.backgroundColor};
   border-radius: 12px;
   color: ${(props) => props.theme.text};
   position: relative;
