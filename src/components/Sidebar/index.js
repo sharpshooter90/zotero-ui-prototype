@@ -14,13 +14,11 @@ const sidebarSlideIn = keyframes`
 
 const StyledSidebar = styled(DragSizing)`
   transition: all 0.3s ease;
-
+  background-color: ${(props) => props.theme.sidebar.background};
   // Apply the animation to the component using the animation property
   animation-name: ${({ isSidebarOpen }) => isSidebarOpen && sidebarSlideIn};
-
   animation-duration: 0.3s;
   animation-timing-function: ease-in-out;
-
   ${(props) => {
     switch (props.position) {
       case "left":

@@ -35,7 +35,7 @@ import Tag from "../Tag";
 const StyledContainer = styled.div`
   display: flex;
   height: calc(100vh - 67px);
-  background: ${(props) => props.theme.backgroundColor};
+  background: ${(props) => props.theme.layoutContainer.background};
   color: ${(props) => props.theme.textColor};
 `;
 const StyledLink = styled(Link)`

@@ -8,7 +8,7 @@ export const ZoteroThemeContext = createContext({
   setMode: () => {},
 });
 const ZoteroThemeProvider = ({ children }) => {
-  const [mode, setMode] = useState("dark");
+  const [mode, setMode] = useState("light");
 
   const handleToggleMode = () => {
     setMode((prevMode) => (prevMode === "light" ? "dark" : "light"));
