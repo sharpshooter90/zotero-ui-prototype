@@ -17,6 +17,7 @@ const TabItem = styled.div`
   color: ${(props) =>
     props.active ? props.theme.colors.text : props.theme.colors.secondaryText};
   cursor: pointer;
+  padding: 8px 18px;
 `;
 
 const TabContent = styled.div`

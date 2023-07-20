@@ -105,6 +105,7 @@ const lightTheme = {
       secondaryText: rgba(lightTextColor, 0.5),
       border: lightBorderColor,
       cardBackground: lightShade,
+      cardHoverBackground: rgba(lightShade, 0.6),
       mutedText: rgba(darkTextColor, 0.5),
     },
     dark: {
@@ -114,6 +115,7 @@ const lightTheme = {
       border: darkBorderColor,
       iconColor: rgba(lightShade, 0.8),
       cardBackground: darkShade,
+      cardHoverBackground: rgba(darkShade, 0.6),
       mutedText: lighten(0.4, darkTextColor),
     },
   },
@@ -121,7 +123,7 @@ const lightTheme = {
     background: white,
   },
   modal: {
-    backgroundColor: darkBackgroundColor,
+    backgroundColor: lightBackgroundColor,
     overlayBackground: black,
   },
   dragHandle: {
@@ -194,6 +196,7 @@ const darkTheme = {
   border: darkBorderColor,
   iconColor: rgba(lightShade, 0.8),
   cardBackground: darkShade,
+  cardBackgroundHover: rgba(darkShade, 0.6),
   mutedText: rgba(darkTextColor, 0.5),
   typography: {
     fontFamily: primaryFontFamily,

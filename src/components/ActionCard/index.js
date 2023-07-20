@@ -28,7 +28,7 @@ const StyledCardContainer = styled.div`
 
   &:hover {
     cursor: pointer;
-    background: ${rgba("#272727", 0.4)};
+    background-color: ${(props) => props.theme.cardBackgroundHover};
   }
 `;
 const StyledCardTitle = styled.div`

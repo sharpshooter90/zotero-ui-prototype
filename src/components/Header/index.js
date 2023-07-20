@@ -1,6 +1,12 @@
-import { mdiCloudSync, mdiPlus } from "@mdi/js";
+import {
+  mdiCloudSync,
+  mdiPlus,
+  mdiWhiteBalanceSunny,
+  mdiWeatherNight,
+} from "@mdi/js";
 import React, { useState, useContext } from "react";
 import styled from "styled-components";
+import { Tooltip } from "react-tippy";
 import Button from "../Button";
 import CreateNewActionModal from "../CreateNewActionModal";
 import {
@@ -8,6 +14,7 @@ import {
   RightSidebarToggleButton,
 } from "../Sidebar/SidebarToggleAction";
 import { ZoteroThemeContext } from "../../context.config";
+import IconButton from "../IconButton";
 
 const StyledHeader = styled.header`
   display: flex;
@@ -26,6 +33,8 @@ const StyledHeader = styled.header`
 const StyledLeftCol = styled.div`
   display: flex;
   align-items: center;
+  justify-content: space-between;
+  min-width: 260px;
 `;
 
 const StyledRightCol = styled.div`
@@ -37,7 +46,7 @@ const StyledRightCol = styled.div`
 export default function Header() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   // Get the theme object and toggle function from the context
-  const { handleToggleMode } = useContext(ZoteroThemeContext);
+  const { handleToggleMode, mode } = useContext(ZoteroThemeContext);
 
   return (
     <StyledHeader>
@@ -46,16 +55,42 @@ export default function Header() {
         <LeftSidebarToggleButton />
       </StyledLeftCol>
       <StyledRightCol>
-        <button onClick={handleToggleMode}>Toggle Theme</button>
-        <RightSidebarToggleButton />
-        <Button
-          variant="secondary"
-          size="xs"
-          leftIcon={mdiCloudSync}
-          iconSize={0.8}
+        <Tooltip
+          title={mode === "light" ? "Dark Mode" : "Light Mode"}
+          position="top"
+          delay={600}
+          size="small"
         >
-          Sync
-        </Button>
+          <IconButton
+            iconPath={mode === "light" ? mdiWeatherNight : mdiWhiteBalanceSunny}
+            iconSize={0.8}
+            onClick={handleToggleMode}
+          />
+        </Tooltip>
+        <Tooltip
+          title="Show information about the current page"
+          position="top"
+          delay={600}
+          size="small"
+        >
+          <RightSidebarToggleButton />
+        </Tooltip>
+
+        <Tooltip
+          title="Connect to zotero cloud to sync your data"
+          delay={600}
+          size="small"
+        >
+          <Button
+            variant="secondary"
+            size="xs"
+            leftIcon={mdiCloudSync}
+            iconSize={0.8}
+          >
+            Sync
+          </Button>
+        </Tooltip>
+
         <Button
           variant="primary"
           size="xs"
