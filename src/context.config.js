@@ -8,11 +8,20 @@ export const ZoteroThemeContext = createContext({
   setMode: () => {},
 });
 const ZoteroThemeProvider = ({ children }) => {
-  const [mode, setMode] = useState("light");
+  const [mode, setMode] = useState(() => {
+    const storedValue = localStorage.getItem("isSelectedThemeMode");
+    const initialValue = storedValue ? JSON.parse(storedValue) : "dark";
+    return initialValue;
+  });
 
   const handleToggleMode = () => {
     setMode((prevMode) => (prevMode === "light" ? "dark" : "light"));
   };
+
+  useEffect(() => {
+    // save the sidebar state to local storage whenever it changes
+    localStorage.setItem("isSelectedThemeMode", JSON.stringify(mode));
+  }, [mode]);
 
   return (
     <ZoteroThemeContext.Provider

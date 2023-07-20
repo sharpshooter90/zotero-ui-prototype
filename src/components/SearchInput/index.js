@@ -7,6 +7,8 @@ const SearchInputContainer = styled.div`
   display: flex;
   align-items: center;
   border-radius: 4px;
+  padding: 2px 8px;
+  max-width: 100%;
 
   ${(props) =>
     props.variant === "default" &&
@@ -61,6 +63,7 @@ const StyledInput = styled.input`
   outline: none;
   background-color: ${({ theme }) => theme.searchInput.background};
   color: ${({ theme }) => theme.searchInput.color};
+  padding: 8px;
 `;
 
 const SearchInput = ({ placeholder, variant, onClick, ...props }) => {
